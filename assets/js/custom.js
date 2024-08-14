@@ -313,3 +313,93 @@ if ($(window).width() > 991) {
         afterCloseMobileMenu();
     });
 }
+
+// Select
+
+$(document).ready(function() {
+    $('.custom-select').select2();
+});
+
+// Chart
+
+var options = {
+    series: [{
+        name: 'Ekonomi',
+        data: [31, 40, 28, 51, 42, 109, 100, 60, 75, 109, 100, 120, 90,]
+    }],
+    chart: {
+        height: 185,
+        type: 'area',
+        foreColor: "#9C9EAB",
+        toolbar: {
+            show: false,
+            tools: {
+                download: false,
+                selection: false,
+              },
+        }
+    },
+    fill: {
+        type: "gradient",
+        gradient: {
+        colors: ["#ffffff"],
+          shadeIntensity: 0,
+          opacityFrom: 0.7,
+          opacityTo: .3,
+          stops: [0, 100]
+        }
+    },
+    grid: {
+      borderColor: "#202543",
+      clipMarkers: false,
+    //   yaxis: {
+    //     lines: {
+    //       show: false
+    //     }
+    //   }
+    },
+    colors: ['#878999'],
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'smooth',
+        width: 2,
+    },
+    xaxis: {
+        // type: 'datetime',
+        categories: ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130"]
+    },
+    tooltip: {
+        theme: 'dark',
+        x: {
+            format: 'dd/MM/yy HH:mm'
+        },
+    },
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+
+// Sosyology Popup
+
+$('.sosyology .bottom .swiper .swiper-wrapper .swiper-slide .exp .btn, .sosyology .bottom .swiper .swiper-wrapper .swiper-slide .img').on('click', function () {
+
+    var parent = $(this).closest('.swiper-slide'),
+        img = parent.attr('data-img'),
+        title = parent.attr('data-title'),
+        subtitle = parent.attr('data-subtitle'),
+        exp = parent.attr('data-exp');
+
+    $('.sosyology-popup .img').css('background-image', 'url('+ img +')');
+    $('.sosyology-popup .texts .top p').text(title);
+    $('.sosyology-popup .texts .bottom .sub-title').text(subtitle);
+    $('.sosyology-popup .texts .bottom p:not(.sub-title)').text(exp);
+
+    $('.sosyology-popup').addClass('active')
+});
+
+$('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', function () {
+    $('.sosyology-popup').removeClass('active') 
+})

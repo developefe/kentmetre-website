@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="assets/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/custom.css">
 
     <title>Kentmetre</title>
 </head>
@@ -49,6 +51,26 @@
                 <div class="icon">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.8331 8.86989V10.6199C11.8337 10.7824 11.8005 10.9432 11.7354 11.092C11.6703 11.2409 11.5748 11.3745 11.4551 11.4843C11.3354 11.5941 11.1941 11.6778 11.0402 11.7298C10.8863 11.7819 10.7232 11.8012 10.5614 11.7866C8.76641 11.5915 7.04217 10.9781 5.52726 9.99573C4.11782 9.10011 2.92287 7.90516 2.02726 6.49573C1.04141 4.97393 0.427899 3.24131 0.236424 1.43823C0.221847 1.27692 0.241018 1.11434 0.292716 0.960841C0.344414 0.807345 0.427507 0.666296 0.536704 0.546673C0.645902 0.42705 0.77881 0.331474 0.926969 0.266032C1.07513 0.200589 1.23529 0.166713 1.39726 0.16656H3.14726C3.43035 0.163774 3.7048 0.264023 3.91945 0.448621C4.1341 0.633219 4.2743 0.889571 4.31392 1.16989C4.38779 1.72993 4.52477 2.27982 4.72226 2.80906C4.80074 3.01785 4.81773 3.24476 4.7712 3.46291C4.72468 3.68105 4.61659 3.88129 4.45976 4.03989L3.71892 4.78073C4.54933 6.24113 5.75852 7.45032 7.21892 8.28073L7.95976 7.53989C8.11836 7.38306 8.3186 7.27497 8.53674 7.22845C8.75489 7.18192 8.9818 7.19891 9.19059 7.27739C9.71983 7.47488 10.2697 7.61186 10.8298 7.68573C11.1131 7.7257 11.3719 7.86843 11.5569 8.08677C11.7419 8.3051 11.8402 8.58381 11.8331 8.86989Z" fill="white"/> </svg>    
                 </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="sosyology-popup">
+        <div class="bg"></div>
+        <div class="img"></div>
+        <div class="texts">
+            <div class="top">
+                <p>Kentten bahsettiğimizde uygarlığı konuşuruz.</p>
+                <div class="close">
+                    <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.5 1.5L1.5 24.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1.5 1.5L24.5 24.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="bottom">
+                <p class="sub-title">Çünkü 'kent' sadece binalardan ibaret değildir; aynı zamanda kültürün ve ilerlemenin merkezidir.</p>
+                <p>Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir. Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir.Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir.Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir.</p>
             </div>
         </div>
     </div>
@@ -174,6 +196,156 @@
                 </div>
             </div>
         </div>
+        <!-- <div class="map-datas">
+            <img src="assets/img/map-bg.svg" alt="">
+            <div class="left">
+                <div class="top">
+                    <select class="custom-select" name="state">
+                        <option value="ist">İstanbul</option>
+                        <option value="an">Ankara</option>
+                    </select>
+                    <div class="select-decor">/ %</div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart"></div>
+                </div>
+                <div class="filter">
+                    <div class="filter-item"> 
+                        <select class="custom-select" name="state">
+                            <option value="nufus">Nüfus</option>
+                            <option value="ekonomi">Ekonomi</option>
+                        </select>
+                        <span>İçin Listelenen Bu Dizinde,</span></div>
+                    <div class="filter-item">
+                        <select class="custom-select" name="state">
+                            <option value="all">Tümü</option>
+                            <option value="asd">Su Ürünleri ve Hayvansal Mamüller</option>
+                        </select>
+                        <span>Alt Kategorisi Listelenir.</span></div>
+                </div>
+                <div class="table-container">
+                    <div class="table-overflow">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>YIL</th>
+                                    <th>İL</th>
+                                    <th>KATEGORİ</th>
+                                    <th>ALT KATEGORİ</th>
+                                    <th>DEĞER</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                                <tr>
+                                    <td>2023</td>
+                                    <td>Çanakkale</td>
+                                    <td>Ekonomi</td>
+                                    <td>Su Ürünleri ve Hayvansal Mamüller</td>
+                                    <td>354,11988</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="map-container">
+                    <div class="span">Endüstri Ayak Trafiği Eyilim Tablosu</div>
+                    <div id="vmap" style="width: 1010px; height: 480px;"></div>
+                </div>
+            </div>
+        </div> -->
         <div class="about-vid">
             <div class="sticky-holder">
                 <img src="assets/img/second-vid.png" alt="">
@@ -195,21 +367,21 @@
             <div class="bottom">
                 <div class="swiper sosyology-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" data-img="assets/img/sosyology-1.png" data-title="Kentten bahsettiğimizde uygarlığı konuşuruz." data-subtitle="Çünkü 'kent' sadece binalardan ibaret değildir; aynı zamanda kültürün ve ilerlemenin merkezidir." data-exp="Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir. Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir.Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir.Tarih boyunca şehirler, medeniyetlerin gelişim merkezi ve sergi alanı olmuştur. Bugün de küresel rekabette yer almaları, markalaşma çabalarının bir sonucudur. Şehir ve medeniyet kavramlarına sadece 'Yerel Yönetim' perspektifinden bakmak, şehre dar bir çerçeveden bakmak ve birçok unsuru gözden kaçırmak demektir.">
                             <div class="img" style="background-image: url(assets/img/sosyology-1.png)"></div>
                             <div class="exp">
                                 <p>Kentten bahsettiğimizde uygarlığı konuşuruz.</p>
                                 <div class="btn">Keşfet</div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" data-img="assets/img/sosyology-2.png" data-title="Şehir hepimizin emanetidir" data-subtitle="Buraya Alt başlık gelecek" data-exp="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quam quae, beatae at quidem minus, ut totam amet nemo sequi exercitationem officiis officia? Expedita placeat iure aut nesciunt tenetur! Ipsa.">
                             <div class="img" style="background-image: url(assets/img/sosyology-2.png)"></div>
                             <div class="exp">
                                 <p>Şehir Hepimizin Emanettidir.</p>
                                 <div class="btn">Keşfet</div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
+                        <div class="swiper-slide" data-img="assets/img/sosyology-3.png" data-title="Kentlerin Yenilikçi Liderlere İhtiyacı Var." data-subtitle="Buraya Alt başlık gelecek" data-exp="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quam quae, beatae at quidem minus, ut totam amet nemo sequi exercitationem officiis officia? Expedita placeat iure aut nesciunt tenetur! Ipsa.">
                             <div class="img" style="background-image: url(assets/img/sosyology-3.png)"></div>
                             <div class="exp">
                                 <p>Kentlerin Yenilikçi Liderlere İhtiyacı Var.</p>
@@ -630,8 +802,45 @@
         </div>
     </section>
 </body>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="assets/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+<script src="assets/jqvmap/maps/jquery.vmap.turkey.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+    //Sehir nufuslarina gore renk paleti olusturulmustur. Iptal icin values degerini silmeniz yeterli
+    var sehir_nufus = {"1":"82700","2":"26480","3":"31530","4":"22820","5":"15550","6":"205790","7":"78830","8":"7860","9":"39940","10":"49210","11":"9120","12":"10690","13":"14100","14":"11890","15":"10520","16":"105260","17":"23240","18":"4750","19":"25350","20":"41100","21":"63430","22":"17890","23":"25570","24":"9650","25":"37350","26":"32300","27":"68240","28":"21140","29":"5430","30":"10700","31":"58560","32":"19460","33":"66610","34":"564890","35":"166200","36":"12820","37":"13950","38":"52910","39":"14710","40":"9610","41":"57790","42":"84160","43":"26490","44":"32500","45":"56550","46":"43550","47":"33240","48":"32510","49":"17550","50":"12250","51":"12670","52":"30760","53":"12740","54":"36390","55":"55280","56":"12230","57":"9010","58":"27230","59":"32800","60":"28180","61":"32970","62":"3760","63":"63760","64":"14550","65":"47470","66":"20700","67":"27350","68":"15470","69":"3700","70":"9600","71":"13350","72":"21840","73":"17440","74":"7470","75":"5050","76":"7670","77":"7340","78":"9310","79":"5240","80":"21350","81":"14580"};
+    jQuery('#vmap').vectorMap(
+        {
+            map: 'turkey_tr',
+            backgroundColor: '#ffffff0',
+            borderColor: '#2C5CAD',
+            borderOpacity: 1,
+            borderWidth: .5,
+            color: '#122763',
+            enableZoom: false,
+            hoverColor: '#2E9DFF',
+            // values: sehir_nufus, //iptal icin yorum icine aliniz! 
+            hoverOpacity: null,
+            scaleColors: ['#FFFFFF', '#FF0000'],
+            selectedColor: '#c9dfaf',
+            selectedRegion: null,
+            showTooltip: true,
+            normalizeFunction: 'polynomial',
+            onRegionClick: function(element, code, region)
+            {
+            var message = 'You clicked "'
+            + region 
+            + '" which has the code: '
+            + code.toUpperCase();
+            alert(message);
+            }
+        });
+    });
+</script>
 <script src="assets/js/custom.js"></script>
 </html>
