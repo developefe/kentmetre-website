@@ -3,11 +3,11 @@
 // Header
 
 function header() {
-	var height = $('header').outerHeight();
-	var lastst = 0;
+    var height = $('header').outerHeight();
+    var lastst = 0;
 
     $(window).on('scroll', function () {
-		var scrollTop = $(this).scrollTop();
+        var scrollTop = $(this).scrollTop();
 
         if (scrollTop > 199) {
             if (scrollTop > lastst) {
@@ -17,21 +17,21 @@ function header() {
                 $('header').addClass('active');
                 $('header').removeClass('in-active');
             }
-        }else {
+        } else {
             $('header').removeClass('active');
             $('header').removeClass('in-active');
         }
 
-		lastst = scrollTop;
-	});
+        lastst = scrollTop;
+    });
 
-	$(window).scroll(function (event) {
-		if ($(window).scrollTop() > 80) {
-			$('header').addClass('fixed-active');
-		} else {
-			$('header').removeClass('fixed-active');
-		}
-	});
+    $(window).scroll(function (event) {
+        if ($(window).scrollTop() > 80) {
+            $('header').addClass('fixed-active');
+        } else {
+            $('header').removeClass('fixed-active');
+        }
+    });
 }
 
 header();
@@ -177,7 +177,7 @@ var servicesExp = new Swiper(".services-slider .services-box.service-exp .swiper
     speed: 700,
 });
 
-servicesSlideHeadline.controller.control = [servicesVid,servicesNum,servicesImg,servicesTitle,servicesExp]
+servicesSlideHeadline.controller.control = [servicesVid, servicesNum, servicesImg, servicesTitle, servicesExp]
 
 
 // Brands
@@ -192,7 +192,7 @@ function positionBlob(el) {
     var x = el.offset().left - $('.brands .top .tab-links').offset().left;
     var y = el.offset().top - $('.brands .top .tab-links').offset().top;
 
-    blob.css({width: w, height: h, left: x + "px", top: y + "px"});
+    blob.css({ width: w, height: h, left: x + "px", top: y + "px" });
 }
 
 positionBlob($('.brands .top .tab-links .link-item:nth-child(1)'));
@@ -204,8 +204,8 @@ $('.brands .top .tab-links .link-item').on('click', function () {
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 
-    $('.brands .bottom .tab-content:nth-child('+ (index + 1) +')').addClass('active').siblings().removeClass('active');
-    $('.brands .bottom').height($('.brands .bottom .tab-content:nth-child('+ (index + 1) +')').height());
+    $('.brands .bottom .tab-content:nth-child(' + (index + 1) + ')').addClass('active').siblings().removeClass('active');
+    $('.brands .bottom').height($('.brands .bottom .tab-content:nth-child(' + (index + 1) + ')').height());
 });
 
 
@@ -270,55 +270,49 @@ function afterCloseMobileMenu() {
 
 if ($(window).width() > 991) {
     $('header .logo').on('click', function () {
-        $('html, body').animate({scrollTop: 0}, 1000)
+        $('html, body').animate({ scrollTop: 0 }, 1000)
     });
     $('header .link-item#what-we-do').on('click', function () {
-        $('html, body').animate({scrollTop: $('.services-slider').offset().top - 5}, 1000)
+        $('html, body').animate({ scrollTop: $('.services-slider').offset().top - 5 }, 1000)
     });
     $('header .link-item#who-are-we').on('click', function () {
-        $('html, body').animate({scrollTop: $('.who-are-we').offset().top - 10}, 1000)
+        $('html, body').animate({ scrollTop: $('.who-are-we').offset().top - 10 }, 1000)
     });
     $('header .link-item#sosyology').on('click', function () {
-        $('html, body').animate({scrollTop: $('.sosyology').offset().top - 40}, 1000)
+        $('html, body').animate({ scrollTop: $('.sosyology').offset().top - 40 }, 1000)
     });
     $('header .link-item#partners').on('click', function () {
-        $('html, body').animate({scrollTop: $('.brands').offset().top - 80}, 1000)
+        $('html, body').animate({ scrollTop: $('.brands').offset().top - 80 }, 1000)
     });
     $('header .link-item#contact').on('click', function () {
-        $('html, body').animate({scrollTop: $('.contact').offset().top - 30}, 1000)
+        $('html, body').animate({ scrollTop: $('.contact').offset().top - 30 }, 1000)
     });
-}else {
+} else {
     $('header .logo').on('click', function () {
-        $('html, body').animate({scrollTop: 0}, 1000);
+        $('html, body').animate({ scrollTop: 0 }, 1000);
         afterCloseMobileMenu();
     });
     $('.mobile-menu .link-item#what-we-do').on('click', function () {
-        $('html, body').animate({scrollTop: $('.services-slider').offset().top - 5}, 1000)
+        $('html, body').animate({ scrollTop: $('.services-slider').offset().top - 5 }, 1000)
         afterCloseMobileMenu();
     });
     $('.mobile-menu .link-item#who-are-we').on('click', function () {
-        $('html, body').animate({scrollTop: $('.who-are-we').offset().top - 10}, 1000)
+        $('html, body').animate({ scrollTop: $('.who-are-we').offset().top - 10 }, 1000)
         afterCloseMobileMenu();
     });
     $('.mobile-menu .link-item#sosyology').on('click', function () {
-        $('html, body').animate({scrollTop: $('.sosyology').offset().top - 40}, 1000)
+        $('html, body').animate({ scrollTop: $('.sosyology').offset().top - 40 }, 1000)
         afterCloseMobileMenu();
     });
     $('.mobile-menu .link-item#partners').on('click', function () {
-        $('html, body').animate({scrollTop: $('.brands').offset().top - 80}, 1000)
+        $('html, body').animate({ scrollTop: $('.brands').offset().top - 80 }, 1000)
         afterCloseMobileMenu();
     });
     $('.mobile-menu .link-item#contact').on('click', function () {
-        $('html, body').animate({scrollTop: $('.contact').offset().top - 30}, 1000)
+        $('html, body').animate({ scrollTop: $('.contact').offset().top - 30 }, 1000)
         afterCloseMobileMenu();
     });
 }
-
-// Select
-
-$(document).ready(function() {
-    $('.custom-select').select2();
-});
 
 // Chart
 
@@ -336,27 +330,27 @@ var options = {
             tools: {
                 download: false,
                 selection: false,
-              },
+            },
         }
     },
     fill: {
         type: "gradient",
         gradient: {
-        colors: ["#ffffff"],
-          shadeIntensity: 0,
-          opacityFrom: 0.7,
-          opacityTo: .3,
-          stops: [0, 100]
+            colors: ["#ffffff"],
+            shadeIntensity: 0,
+            opacityFrom: 0.7,
+            opacityTo: .3,
+            stops: [0, 100]
         }
     },
     grid: {
-      borderColor: "#202543",
-      clipMarkers: false,
-    //   yaxis: {
-    //     lines: {
-    //       show: false
-    //     }
-    //   }
+        borderColor: "#202543",
+        clipMarkers: false,
+        //   yaxis: {
+        //     lines: {
+        //       show: false
+        //     }
+        //   }
     },
     colors: ['#878999'],
     dataLabels: {
@@ -392,7 +386,7 @@ $('.sosyology .bottom .swiper .swiper-wrapper .swiper-slide .exp .btn, .sosyolog
         subtitle = parent.attr('data-subtitle'),
         exp = parent.attr('data-exp');
 
-    $('.sosyology-popup .img').css('background-image', 'url('+ img +')');
+    $('.sosyology-popup .img').css('background-image', 'url(' + img + ')');
     $('.sosyology-popup .texts .top p').text(title);
     $('.sosyology-popup .texts .bottom .sub-title').text(subtitle);
     $('.sosyology-popup .texts .bottom p:not(.sub-title)').text(exp);
@@ -401,5 +395,336 @@ $('.sosyology .bottom .swiper .swiper-wrapper .swiper-slide .exp .btn, .sosyolog
 });
 
 $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', function () {
-    $('.sosyology-popup').removeClass('active') 
+    $('.sosyology-popup').removeClass('active')
 })
+
+// Entrance Video Animation
+
+/* The encoding is super important here to enable frame-by-frame scrubbing. */
+
+// ffmpeg -i ~/Downloads/Toshiba\ video/original.mov -movflags faststart -vcodec libx264 -crf 23 -g 1 -pix_fmt yuv420p output.mp4
+// ffmpeg -i ~/Downloads/Toshiba\ video/original.mov -vf scale=960:-1 -movflags faststart -vcodec libx264 -crf 20 -g 1 -pix_fmt yuv420p output_960.mp4
+
+// const video = $("#v0");
+// let src = video.currentSrc || video.src;
+// console.log(video, src);
+
+// // /* Make sure the video is 'activated' on iOS */
+// function once(el, event, fn, opts) {
+//     var onceFn = function (e) {
+//         el.removeEventListener(event, onceFn);
+//         fn.apply(this, arguments);
+//     };
+//     el.addEventListener(event, onceFn, opts);
+//     return onceFn;
+// }
+
+// once(document.documentElement, "touchstart", function (e) {
+//     video.play();
+//     video.pause();
+// });
+
+// // /* ---------------------------------- */
+// // /* Scroll Control! */
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// let tl = gsap.timeline({
+//     defaults: { duration: 1 },
+//     scrollTrigger: {
+//         trigger: ".entrance .sticky-holder",
+//         start: "top top",
+//         end: "top+=2000px top",
+//         scrub: true,
+//         markers: true,
+//     }
+// });
+
+// once(video, "loadedmetadata", () => {
+//     tl.fromTo(
+//         video,
+//         {
+//             currentTime: 0
+//         },
+//         {
+//             currentTime: video.duration || 1
+//         }
+//     );
+// });
+
+/* When first coded, the Blobbing was important to ensure the browser wasn't dropping previously played segments, but it doesn't seem to be a problem now. Possibly based on memory availability? */
+// setTimeout(function () {
+//     if (window["fetch"]) {
+//         fetch(src)
+//             .then((response) => response.blob())
+//             .then((response) => {
+//                 var blobURL = URL.createObjectURL(response);
+
+//                 var t = video.currentTime;
+//                 once(document.documentElement, "touchstart", function (e) {
+//                     video.play();
+//                     video.pause();
+//                 });
+
+//                 video.setAttribute("src", blobURL);
+//                 video.currentTime = t + 0.01;
+//             });
+//     }
+// }, 1000);
+
+/* ---------------------------------- */
+
+
+// var frameNumber = 0, // start video at frame 0
+//     // lower numbers = faster playback
+//     playbackConst = 500, 
+//     // get page height from video duration
+//     setHeight = $(".entrance"), 
+//     // select video element         
+//     vid = document.getElementById('v0'); 
+
+// // dynamically set the page height according to video length
+// vid.addEventListener('loadedmetadata', function() {
+//   setHeight.css('height', Math.floor(vid.duration) * playbackConst + "px");
+// });
+
+// // Use requestAnimationFrame for smooth playback
+// function scrollPlay(){  
+//   var frameNumber  = window.pageYOffset/playbackConst;
+//   vid.currentTime  = frameNumber;
+//   window.requestAnimationFrame(scrollPlay);
+// }
+
+// window.requestAnimationFrame(scrollPlay);
+
+
+
+
+    // GSAP ve ScrollTrigger'ın yüklü olduğundan emin olun
+// gsap.registerPlugin(ScrollTrigger);
+
+// // Video elementini seçin
+// const video = document.querySelector('#v0');
+
+// let videoDuration = 0;
+
+// // Video yüklendiğinde süresini al
+// video.addEventListener('loadedmetadata', () => {
+//     videoDuration = video.duration;
+// });
+
+// // ScrollTrigger ayarlarını yapın
+// ScrollTrigger.create({
+//     trigger: ".entrance .sticky-holder",
+//     start: "top top",
+//     end: "bottom bottom",
+//     scrub: true,
+//     onUpdate: self => {
+//         if (videoDuration > 0) {
+//             const scrollPos = self.progress;
+//             video.currentTime = scrollPos * videoDuration;
+//         }
+//     }
+// });
+
+// // Video oynatımını başlat
+// // video.pause();
+
+
+// Map and Datas
+
+// JSON dosyasını yükleme fonksiyonu
+async function fetchData() {
+    const response = await fetch('assets/datas/map-datas.json'); // JSON dosyasının yolu
+    const data = await response.json();
+    return data;
+}
+
+// Veriyi il bazında filtreleme fonksiyonu
+function filterByCityAndCategory(data, city, category, subCategory) {
+    let filteredData = data.filter(item => item.SEHIR === city && item.KATEGORI === category);
+
+    if (subCategory && subCategory !== "TUMU") {
+        filteredData = filteredData.filter(item => item.ALT_KATEGORI === subCategory);
+    }
+
+    return filteredData;
+}
+
+// Veriyi yıl büyükten küçüğe sıralama fonksiyonu
+function sortByYear(data) {
+    return data.sort((a, b) => b.YIL - a.YIL);
+}
+
+// Filtrelenmiş veriyi tabloya ekleme fonksiyonu
+function updateTable(data) {
+    const tableBody = $('#data-table-body');
+    var totalCount;
+    tableBody.empty(); // Önceki içeriği temizle
+
+    data.forEach((item, index) => {
+        const row = `
+            <tr>
+                <td>${item.YIL}</td>
+                <td>${item.SEHIR}</td>
+                <td>${item.KATEGORI}</td>
+                <td>${item.ALT_KATEGORI}</td>
+                <td>${item.DEGER.toLocaleString()}</td>
+            </tr>
+        `;
+        totalCount = index;
+        tableBody.append(row);
+    });
+
+    if (data.length == 0) {
+        tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>")
+    }
+
+    $('.map-datas .left .table-container table thead tr th:nth-child(4) span').remove();
+    $('.map-datas .left .table-container table thead tr th:nth-child(4)').append('<span>('+ (totalCount ? totalCount : 0) +')</span>')
+}
+
+// Veriyi işleme ve tabloya bastırma
+var memoFilteredData;
+
+async function processDataAndDisplay(city, category, subCategory) {
+    memoFilteredData = [city, category, subCategory]
+
+    const data = await fetchData();
+    let filteredData = filterByCityAndCategory(data, memoFilteredData[0], memoFilteredData[1], memoFilteredData[2]);
+    filteredData = sortByYear(filteredData);
+    updateTable(filteredData);
+}
+processDataAndDisplay('ISTANBUL', 'NÜFUS', 'TUMU')
+
+// Select
+
+$(document).ready(function () {
+    $('#map-citys').select2();
+    $('#map-category').select2();
+});
+
+jQuery(document).ready(function() {
+    // Verileri fetch etme fonksiyonu
+    async function fetchAltKategoriler(region, category) {
+        // Örneğin, JSON verilerini fetch ediyoruz (burada JSON verisi simüle edilmiştir)
+        let altKategoriler = []; // Bu array fetch edilen alt kategorilerle doldurulacak
+
+        // Örnek JSON verisi
+        const data = await fetchData()
+
+        // Gelen verilerden alt kategorileri filtrele
+        altKategoriler = data
+            .filter(item => item.SEHIR === region && item.KATEGORI === category)
+            .map(item => item.ALT_KATEGORI);
+
+        // Tekrarlayan alt kategorileri kaldır
+        altKategoriler = [...new Set(altKategoriler)];
+
+        return altKategoriler;
+    }
+
+    // Select2'nin initialize edilmesi
+    $('#map-subcategory').select2();
+
+    // Alt kategorileri select2'ye ekleme fonksiyonu
+    async function createOptionsForSubcategorys(region, kategori) {
+        let altKategoriler = await fetchAltKategoriler(region, kategori);
+        let $select = $('#map-subcategory');
+
+        // Önce mevcut seçenekleri temizle
+        $select.empty();
+
+        // "Tümü" seçeneği ekleme
+        $select.append('<option value="TUMU">Tümü</option>');
+
+        // Yeni seçenekleri ekleme
+        altKategoriler.forEach(function(altKategori) {
+            $select.append(new Option(altKategori, altKategori));
+        });
+
+        // Select2'yi güncelleme
+        $select.trigger('change');
+    }
+
+    setTimeout(() => {
+        createOptionsForSubcategorys('ISTANBUL', 'NÜFUS');
+    });
+    
+    var isManualChange = false;
+    
+    $('#map-citys').on('change', function() {
+        if (!isManualChange) {
+            var city = $("#map-citys option:selected").val();
+            var cityNumber = $("#map-citys option:selected").index() + 1;
+            $('.map-datas .right div#vmap svg >g path:nth-child(' + cityNumber + ')').click();
+            processDataAndDisplay(city, memoFilteredData[1], memoFilteredData[2]);
+        }
+
+        createOptionsForSubcategorys(city, memoFilteredData[1], memoFilteredData[2])
+
+        isManualChange = false;
+    });
+    
+    $('#map-category').on('change', function() {
+        var category = $("#map-category option:selected").val();
+        processDataAndDisplay(memoFilteredData[0], category, memoFilteredData[2])
+        createOptionsForSubcategorys(memoFilteredData[0], category, memoFilteredData[2])
+    });
+    
+    $('#map-subcategory').on('change', function() {
+        var subcategory = $("#map-subcategory option:selected").val();
+        processDataAndDisplay(memoFilteredData[0], memoFilteredData[1], subcategory)
+    });
+
+    jQuery('#vmap').vectorMap(
+        {
+            map: 'turkey_tr',
+            backgroundColor: '#ffffff0',
+            borderColor: '#2C5CAD',
+            borderOpacity: 1,
+            borderWidth: .5,
+            color: '#122763',
+            enableZoom: false,
+            hoverColor: '#2E9DFF',
+            hoverOpacity: null,
+            scaleColors: ['#FFFFFF', '#FF0000'],
+            selectedColor: '#2E9DFF',
+            selectedRegion: null,
+            showTooltip: true,
+            normalizeFunction: 'polynomial',
+            onRegionClick: function(element, code, region)
+            {   
+                isManualChange = true;
+    
+                var region = region.toUpperCase();
+                var trMap = {
+                    'ç':'c',
+                    'Ç':'C',
+                    'ğ':'g',
+                    'Ğ':'G',
+                    'ş':'s',
+                    'Ş':'S',
+                    'ü':'u',
+                    'Ü':'U',
+                    'ı':'i',
+                    'İ':'I',
+                    'ö':'o',
+                    'Ö':'O'
+                };
+    
+                for (var key in trMap) {
+                    var regExp = new RegExp(key, 'g');
+                    region = region.replace(regExp, trMap[key]);
+                }
+    
+                processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
+                createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
+                $('#map-citys').val(region)
+                $('#map-citys').trigger('change')
+                
+            }
+        });
+        
+    $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
+});

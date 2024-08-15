@@ -77,7 +77,22 @@
     <section class="main">
         <div class="entrance">
             <div class="sticky-holder">
-                <img src="assets/img/main-sliderpng.png" alt="">
+                <!-- <img src="assets/img/main-sliderpng.png" alt=""> -->
+                <!-- <video 
+                    src="assets/videos/team.mp4" 
+                    playsinline="true" 
+                    webkit-playsinline="true" 
+                    preload="auto" 
+                    muted="muted" 
+                    class="entrance-logo"
+                >
+                </video> -->
+                <!-- <video id="v0" tabindex="0" autobuffer="autobuffer" preload="preload" muted="muted" autoplay="false">
+                    <source 
+                        type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'
+                        src="assets/videos/optimized/map.mp4"
+                    ></source>
+                </video> -->
             </div>
             <div class="slider-props">
                 <div class="left">
@@ -196,13 +211,92 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="map-datas">
+        <div class="map-datas">
             <img src="assets/img/map-bg.svg" alt="">
             <div class="left">
                 <div class="top">
-                    <select class="custom-select" name="state">
-                        <option value="ist">İstanbul</option>
-                        <option value="an">Ankara</option>
+                    <select class="custom-select" id="map-citys" name="state">
+                        <option value="ADANA">Adana</option>
+                        <option value="ADIYAMAN">Adıyaman</option>
+                        <option value="AFYONKARAHISAR">Afyonkarahisar</option>
+                        <option value="AGRI">Ağrı</option>
+                        <option value="AMASYA">Amasya</option>
+                        <option value="ANKARA">Ankara</option>
+                        <option value="ANTALYA">Antalya</option>
+                        <option value="ARTVIN">Artvin</option>
+                        <option value="AYDIN">Aydın</option>
+                        <option value="BALIKESIR">Balıkesir</option>
+                        <option value="BILECIK">Bilecik</option>
+                        <option value="BINGOL">Bingöl</option>
+                        <option value="BITLIS">Bitlis</option>
+                        <option value="BOLU">Bolu</option>
+                        <option value="BURDUR">Burdur</option>
+                        <option value="BURSA">Bursa</option>
+                        <option value="ÇANAKKALE">Çanakkale</option>
+                        <option value="ÇANKIRI">Çankırı</option>
+                        <option value="ÇORUM">Çorum</option>
+                        <option value="DENIZLI">Denizli</option>
+                        <option value="DIYARBAKIR">Diyarbakır</option>
+                        <option value="EDIRNE">Edirne</option>
+                        <option value="ELAZIG">Elazığ</option>
+                        <option value="ERZINCAN">Erzincan</option>
+                        <option value="ERZURUM">Erzurum</option>
+                        <option value="ESKISEHIR">Eskişehir</option>
+                        <option value="GAZIANTEP">Gaziantep</option>
+                        <option value="GIRESUN">Giresun</option>
+                        <option value="GUMUSHANE">Gümüşhane</option>
+                        <option value="HAKKARI">Hakkâri</option>
+                        <option value="HATAY">Hatay</option>
+                        <option value="ISPARTA">Isparta</option>
+                        <option value="MERSIN">Mersin</option>
+                        <option value="ISTANBUL">İstanbul</option>
+                        <option value="IZMIR">İzmir</option>
+                        <option value="KARS">Kars</option>
+                        <option value="KASTAMONU">Kastamonu</option>
+                        <option value="KAYSERI">Kayseri</option>
+                        <option value="KIRKLARELI">Kırklareli</option>
+                        <option value="KIRSEHIR">Kırşehir</option>
+                        <option value="KOCAELI">Kocaeli</option>
+                        <option value="KONYA">Konya</option>
+                        <option value="KUTAHYA">Kütahya</option>
+                        <option value="MALATYA">Malatya</option>
+                        <option value="MANISA">Manisa</option>
+                        <option value="KAHRAMANMARAS">Kahramanmaraş</option>
+                        <option value="MARDIN">Mardin</option>
+                        <option value="MUGLA">Muğla</option>
+                        <option value="MUS">Muş</option>
+                        <option value="NEVSEHIR">Nevşehir</option>
+                        <option value="NIGDE">Niğde</option>
+                        <option value="ORDU">Ordu</option>
+                        <option value="RIZE">Rize</option>
+                        <option value="SAKARYA">Sakarya</option>
+                        <option value="SAMSUN">Samsun</option>
+                        <option value="SIIRT">Siirt</option>
+                        <option value="SINOP">Sinop</option>
+                        <option value="SIVAS">Sivas</option>
+                        <option value="TEKIRDAG">Tekirdağ</option>
+                        <option value="TOKAT">Tokat</option>
+                        <option value="TRABZON">Trabzon</option>
+                        <option value="TUNCELI">Tunceli</option>
+                        <option value="SANLIURFA">Şanlıurfa</option>
+                        <option value="USAK">Uşak</option>
+                        <option value="VAN">Van</option>
+                        <option value="YOZGAT">Yozgat</option>
+                        <option value="ZONGULDAK">Zonguldak</option>
+                        <option value="AKSARAY">Aksaray</option>
+                        <option value="BAYBURT">Bayburt</option>
+                        <option value="KARAMAN">Karaman</option>
+                        <option value="KIRIKKALE">Kırıkkale</option>
+                        <option value="BATMAN">Batman</option>
+                        <option value="SIRNAK">Şırnak</option>
+                        <option value="BARTIN">Bartın</option>
+                        <option value="ARDAHAN">Ardahan</option>
+                        <option value="IGDIR">Iğdır</option>
+                        <option value="YALOVA">Yalova</option>
+                        <option value="KARABUK">Karabük</option>
+                        <option value="KILIS">Kilis</option>
+                        <option value="OSMANIYE">Osmaniye</option>
+                        <option value="DUZCE">Düzce</option>
                     </select>
                     <div class="select-decor">/ %</div>
                 </div>
@@ -211,14 +305,14 @@
                 </div>
                 <div class="filter">
                     <div class="filter-item"> 
-                        <select class="custom-select" name="state">
-                            <option value="nufus">Nüfus</option>
-                            <option value="ekonomi">Ekonomi</option>
+                        <select class="custom-select" id="map-category" name="state">
+                            <option value="NÜFUS">Nüfus</option>
+                            <option value="EKONOMI">Ekonomi</option>
                         </select>
                         <span>İçin Listelenen Bu Dizinde,</span></div>
                     <div class="filter-item">
-                        <select class="custom-select" name="state">
-                            <option value="all">Tümü</option>
+                        <select class="custom-select" id="map-subcategory" name="state">
+                            <option value="TUMU">Tümü</option>
                             <option value="asd">Su Ürünleri ve Hayvansal Mamüller</option>
                         </select>
                         <span>Alt Kategorisi Listelenir.</span></div>
@@ -235,7 +329,7 @@
                                     <th>DEĞER</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="data-table-body">
                                 <tr>
                                     <td>2023</td>
                                     <td>Çanakkale</td>
@@ -345,7 +439,7 @@
                     <div id="vmap" style="width: 1010px; height: 480px;"></div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="about-vid">
             <div class="sticky-holder">
                 <img src="assets/img/second-vid.png" alt="">
@@ -802,45 +896,14 @@
         </div>
     </section>
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="assets/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+<script src="assets/jqvmap/jquery.vmap.min.js" type="text/javascript"></script>
 <script src="assets/jqvmap/maps/jquery.vmap.turkey.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-    //Sehir nufuslarina gore renk paleti olusturulmustur. Iptal icin values degerini silmeniz yeterli
-    var sehir_nufus = {"1":"82700","2":"26480","3":"31530","4":"22820","5":"15550","6":"205790","7":"78830","8":"7860","9":"39940","10":"49210","11":"9120","12":"10690","13":"14100","14":"11890","15":"10520","16":"105260","17":"23240","18":"4750","19":"25350","20":"41100","21":"63430","22":"17890","23":"25570","24":"9650","25":"37350","26":"32300","27":"68240","28":"21140","29":"5430","30":"10700","31":"58560","32":"19460","33":"66610","34":"564890","35":"166200","36":"12820","37":"13950","38":"52910","39":"14710","40":"9610","41":"57790","42":"84160","43":"26490","44":"32500","45":"56550","46":"43550","47":"33240","48":"32510","49":"17550","50":"12250","51":"12670","52":"30760","53":"12740","54":"36390","55":"55280","56":"12230","57":"9010","58":"27230","59":"32800","60":"28180","61":"32970","62":"3760","63":"63760","64":"14550","65":"47470","66":"20700","67":"27350","68":"15470","69":"3700","70":"9600","71":"13350","72":"21840","73":"17440","74":"7470","75":"5050","76":"7670","77":"7340","78":"9310","79":"5240","80":"21350","81":"14580"};
-    jQuery('#vmap').vectorMap(
-        {
-            map: 'turkey_tr',
-            backgroundColor: '#ffffff0',
-            borderColor: '#2C5CAD',
-            borderOpacity: 1,
-            borderWidth: .5,
-            color: '#122763',
-            enableZoom: false,
-            hoverColor: '#2E9DFF',
-            // values: sehir_nufus, //iptal icin yorum icine aliniz! 
-            hoverOpacity: null,
-            scaleColors: ['#FFFFFF', '#FF0000'],
-            selectedColor: '#c9dfaf',
-            selectedRegion: null,
-            showTooltip: true,
-            normalizeFunction: 'polynomial',
-            onRegionClick: function(element, code, region)
-            {
-            var message = 'You clicked "'
-            + region 
-            + '" which has the code: '
-            + code.toUpperCase();
-            alert(message);
-            }
-        });
-    });
-</script>
 <script src="assets/js/custom.js"></script>
 </html>
