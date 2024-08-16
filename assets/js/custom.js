@@ -343,24 +343,24 @@ $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', funct
 // ffmpeg -i ~/Downloads/Toshiba\ video/original.mov -movflags faststart -vcodec libx264 -crf 23 -g 1 -pix_fmt yuv420p output.mp4
 // ffmpeg -i ~/Downloads/Toshiba\ video/original.mov -vf scale=960:-1 -movflags faststart -vcodec libx264 -crf 20 -g 1 -pix_fmt yuv420p output_960.mp4
 
-// const video = $("#v0");
-// let src = video.currentSrc || video.src;
-// console.log(video, src);
+const video = $("#v0");
+let src = video.currentSrc || video.src;
+console.log(video, src);
 
-// // /* Make sure the video is 'activated' on iOS */
-// function once(el, event, fn, opts) {
-//     var onceFn = function (e) {
-//         el.removeEventListener(event, onceFn);
-//         fn.apply(this, arguments);
-//     };
-//     el.addEventListener(event, onceFn, opts);
-//     return onceFn;
-// }
+// /* Make sure the video is 'activated' on iOS */
+function once(el, event, fn, opts) {
+    var onceFn = function (e) {
+        el.removeEventListener(event, onceFn);
+        fn.apply(this, arguments);
+    };
+    el.addEventListener(event, onceFn, opts);
+    return onceFn;
+}
 
-// once(document.documentElement, "touchstart", function (e) {
-//     video.play();
-//     video.pause();
-// });
+once(document.documentElement, "touchstart", function (e) {
+    video.play();
+    video.pause();
+});
 
 // // /* ---------------------------------- */
 // // /* Scroll Control! */
@@ -413,9 +413,9 @@ $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', funct
 /* ---------------------------------- */
 
 
-// var frameNumber = 0, // start video at frame 0
+// var frameNumber = 1, // start video at frame 0
 //     // lower numbers = faster playback
-//     playbackConst = 500, 
+//     playbackConst = 100, 
 //     // get page height from video duration
 //     setHeight = $(".entrance"), 
 //     // select video element         
@@ -466,7 +466,7 @@ $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', funct
 // });
 
 // // Video oynatımını başlat
-// // video.pause();
+// video.pause();
 
 
 // Chart
@@ -621,55 +621,55 @@ processDataAndDisplay('ARTVIN', 'NÜFUS', 'YAS ARALIGI 90+')
 
 $(document).ready(function () {
     $('#map-citys').select2();
-    $('#map-category').select2();
+    // $('#map-category').select2();
 });
 
 jQuery(document).ready(function() {
     // Verileri fetch etme fonksiyonu
-    async function fetchSubCategorys(region, category) {
-        // Örneğin, JSON verilerini fetch ediyoruz (burada JSON verisi simüle edilmiştir)
-        let subcategorys = []; // Bu array fetch edilen alt kategorilerle doldurulacak
+    // async function fetchSubCategorys(region, category) {
+    //     // Örneğin, JSON verilerini fetch ediyoruz (burada JSON verisi simüle edilmiştir)
+    //     let subcategorys = []; // Bu array fetch edilen alt kategorilerle doldurulacak
 
-        // Örnek JSON verisi
-        const data = await fetchData()
+    //     // Örnek JSON verisi
+    //     const data = await fetchData()
 
-        // Gelen verilerden alt kategorileri filtrele
-        subcategorys = data
-            .filter(item => item.SEHIR === region && item.KATEGORI === category)
-            .map(item => item.ALT_KATEGORI);
+    //     // Gelen verilerden alt kategorileri filtrele
+    //     subcategorys = data
+    //         .filter(item => item.SEHIR === region && item.KATEGORI === category)
+    //         .map(item => item.ALT_KATEGORI);
 
-        // Tekrarlayan alt kategorileri kaldır
-        subcategorys = [...new Set(subcategorys)];
+    //     // Tekrarlayan alt kategorileri kaldır
+    //     subcategorys = [...new Set(subcategorys)];
 
-        return subcategorys;
-    }
+    //     return subcategorys;
+    // }
 
     // Select2'nin initialize edilmesi
-    $('#map-subcategory').select2();
+    // $('#map-subcategory').select2();
 
     // Alt kategorileri select2'ye ekleme fonksiyonu
-    async function createOptionsForSubcategorys(region, kategori) {
-        let altKategoriler = await fetchSubCategorys(region, kategori);
-        let $select = $('#map-subcategory');
+    // async function createOptionsForSubcategorys(region, kategori) {
+    //     let altKategoriler = await fetchSubCategorys(region, kategori);
+    //     let $select = $('#map-subcategory');
 
-        // Önce mevcut seçenekleri temizle
-        $select.empty();
+    //     // Önce mevcut seçenekleri temizle
+    //     $select.empty();
 
-        // "Tümü" seçeneği ekleme
-        $select.append('<option value="TUMU">Tümü</option>');
+    //     // "Tümü" seçeneği ekleme
+    //     $select.append('<option value="TUMU">Tümü</option>');
 
-        // Yeni seçenekleri ekleme
-        altKategoriler.forEach(function(altKategori) {
-            $select.append(new Option(altKategori, altKategori));
-        });
+    //     // Yeni seçenekleri ekleme
+    //     altKategoriler.forEach(function(altKategori) {
+    //         $select.append(new Option(altKategori, altKategori));
+    //     });
 
-        // Select2'yi güncelleme
-        $select.trigger('change');
-    }
+    //     // Select2'yi güncelleme
+    //     $select.trigger('change');
+    // }
 
-    setTimeout(() => {
-        createOptionsForSubcategorys('ARTVIN', 'NÜFUS');
-    });
+    // setTimeout(() => {
+    //     createOptionsForSubcategorys('ARTVIN', 'NÜFUS');
+    // });
     
     var isManualChange = false;
     var isSelectClick = false;
@@ -683,21 +683,21 @@ jQuery(document).ready(function() {
             processDataAndDisplay(city, memoFilteredData[1], memoFilteredData[2]);
         }
 
-        createOptionsForSubcategorys(city, memoFilteredData[1], memoFilteredData[2])
+        // createOptionsForSubcategorys(city, memoFilteredData[1], memoFilteredData[2])
 
         isManualChange = false;
     });
     
-    $('#map-category').on('change', function() {
-        var category = $("#map-category option:selected").val();
-        processDataAndDisplay(memoFilteredData[0], category, memoFilteredData[2])
-        createOptionsForSubcategorys(memoFilteredData[0], category, memoFilteredData[2])
-    });
+    // $('#map-category').on('change', function() {
+    //     var category = $("#map-category option:selected").val();
+    //     processDataAndDisplay(memoFilteredData[0], category, memoFilteredData[2])
+    //     createOptionsForSubcategorys(memoFilteredData[0], category, memoFilteredData[2])
+    // });
     
-    $('#map-subcategory').on('change', function() {
-        var subcategory = $("#map-subcategory option:selected").val();
-        processDataAndDisplay(memoFilteredData[0], memoFilteredData[1], subcategory)
-    });
+    // $('#map-subcategory').on('change', function() {
+    //     var subcategory = $("#map-subcategory option:selected").val();
+    //     processDataAndDisplay(memoFilteredData[0], memoFilteredData[1], subcategory)
+    // });
 
     jQuery('#vmap').vectorMap(
         {
@@ -743,7 +743,7 @@ jQuery(document).ready(function() {
     
                 if (!isSelectClick) {
                     processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
-                    createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
+                    // createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
                 }
                 
                 $('#map-citys').val(region)
@@ -755,5 +755,19 @@ jQuery(document).ready(function() {
             }
         });
         
-    // $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
+    $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
+});
+
+// 
+
+const video2 = document.getElementById('videoxx');
+const totalScrollHeightd = document.body.scrollHeight - window.innerHeight;
+
+// Kaydırma sırasında çalışacak olay
+window.addEventListener('scroll', function () {
+    const scrollTops = window.scrollY;
+    const scrollFractions = scrollTops / totalScrollHeightd;
+    const videoDuration2 = video2.duration;
+
+    video2.currentTime = scrollFractions * videoDuration2;
 });
