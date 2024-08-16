@@ -1222,7 +1222,7 @@ padding: 15px 10px;
 }
 
 .map-datas .right div#vmap svg >g path[fill="#2E9DFF"] {
-    transform: translateY(-7px);
+    /* transform: translateY(-7px); */
 }
 
 .jqvmap-label {border: 1px solid #2C5CAD;background: #122763;color: #ffffff;padding: 5px 15px;border-radius: 6px;}

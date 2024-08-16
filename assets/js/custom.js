@@ -314,68 +314,6 @@ if ($(window).width() > 991) {
     });
 }
 
-// Chart
-
-var options = {
-    series: [{
-        name: 'Ekonomi',
-        data: [31, 40, 28, 51, 42, 109, 100, 60, 75, 109, 100, 120, 90,]
-    }],
-    chart: {
-        height: 185,
-        type: 'area',
-        foreColor: "#9C9EAB",
-        toolbar: {
-            show: false,
-            tools: {
-                download: false,
-                selection: false,
-            },
-        }
-    },
-    fill: {
-        type: "gradient",
-        gradient: {
-            colors: ["#ffffff"],
-            shadeIntensity: 0,
-            opacityFrom: 0.7,
-            opacityTo: .3,
-            stops: [0, 100]
-        }
-    },
-    grid: {
-        borderColor: "#202543",
-        clipMarkers: false,
-        //   yaxis: {
-        //     lines: {
-        //       show: false
-        //     }
-        //   }
-    },
-    colors: ['#878999'],
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'smooth',
-        width: 2,
-    },
-    xaxis: {
-        // type: 'datetime',
-        categories: ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130"]
-    },
-    tooltip: {
-        theme: 'dark',
-        x: {
-            format: 'dd/MM/yy HH:mm'
-        },
-    },
-};
-
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
-
-
 // Sosyology Popup
 
 $('.sosyology .bottom .swiper .swiper-wrapper .swiper-slide .exp .btn, .sosyology .bottom .swiper .swiper-wrapper .swiper-slide .img').on('click', function () {
@@ -531,6 +469,72 @@ $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', funct
 // // video.pause();
 
 
+// Chart
+
+var chartName = "Nüfus";
+var chartSeriesData = [];
+var chartXAxisData = [];
+
+var options = {
+    series: [{
+        name: chartName,
+        data: chartSeriesData
+    }],
+    chart: {
+        height: 185,
+        type: 'area',
+        foreColor: "#9C9EAB",
+        toolbar: {
+            show: false,
+            tools: {
+                download: false,
+                selection: false,
+            },
+        }
+    },
+    fill: {
+        type: "gradient",
+        gradient: {
+            colors: ["#ffffff"],
+            shadeIntensity: 0,
+            opacityFrom: 0.7,
+            opacityTo: .3,
+            stops: [0, 100]
+        }
+    },
+    grid: {
+        borderColor: "#202543",
+        clipMarkers: false,
+        //   yaxis: {
+        //     lines: {
+        //       show: false
+        //     }
+        //   }
+    },
+    colors: ['#878999'],
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'smooth',
+        width: 2,
+    },
+    xaxis: {
+        // type: 'datetime',
+        categories: chartXAxisData
+    },
+    tooltip: {
+        theme: 'dark',
+        x: {
+            format: 'dd/MM/yy HH:mm'
+        },
+    },
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+
 // Map and Datas
 
 // JSON dosyasını yükleme fonksiyonu
@@ -562,6 +566,10 @@ function updateTable(data) {
     var totalCount;
     tableBody.empty(); // Önceki içeriği temizle
 
+    chartName = data[0].SEHIR;
+    chartSeriesData = [];
+    chartXAxisData = [];
+
     data.forEach((item, index) => {
         const row = `
             <tr>
@@ -574,7 +582,19 @@ function updateTable(data) {
         `;
         totalCount = index;
         tableBody.append(row);
+
+        chartSeriesData.push(item.DEGER.toLocaleString());
+        chartXAxisData.push(item.YIL);
     });
+
+    chart.updateOptions({
+        xaxis: {
+           categories: chartXAxisData
+        },
+        series: [{
+           data: chartSeriesData
+        }],
+     });
 
     if (data.length == 0) {
         tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>")
@@ -595,7 +615,7 @@ async function processDataAndDisplay(city, category, subCategory) {
     filteredData = sortByYear(filteredData);
     updateTable(filteredData);
 }
-processDataAndDisplay('ISTANBUL', 'NÜFUS', 'TUMU')
+processDataAndDisplay('ARTVIN', 'NÜFUS', 'YAS ARALIGI 90+')
 
 // Select
 
@@ -606,22 +626,22 @@ $(document).ready(function () {
 
 jQuery(document).ready(function() {
     // Verileri fetch etme fonksiyonu
-    async function fetchAltKategoriler(region, category) {
+    async function fetchSubCategorys(region, category) {
         // Örneğin, JSON verilerini fetch ediyoruz (burada JSON verisi simüle edilmiştir)
-        let altKategoriler = []; // Bu array fetch edilen alt kategorilerle doldurulacak
+        let subcategorys = []; // Bu array fetch edilen alt kategorilerle doldurulacak
 
         // Örnek JSON verisi
         const data = await fetchData()
 
         // Gelen verilerden alt kategorileri filtrele
-        altKategoriler = data
+        subcategorys = data
             .filter(item => item.SEHIR === region && item.KATEGORI === category)
             .map(item => item.ALT_KATEGORI);
 
         // Tekrarlayan alt kategorileri kaldır
-        altKategoriler = [...new Set(altKategoriler)];
+        subcategorys = [...new Set(subcategorys)];
 
-        return altKategoriler;
+        return subcategorys;
     }
 
     // Select2'nin initialize edilmesi
@@ -629,7 +649,7 @@ jQuery(document).ready(function() {
 
     // Alt kategorileri select2'ye ekleme fonksiyonu
     async function createOptionsForSubcategorys(region, kategori) {
-        let altKategoriler = await fetchAltKategoriler(region, kategori);
+        let altKategoriler = await fetchSubCategorys(region, kategori);
         let $select = $('#map-subcategory');
 
         // Önce mevcut seçenekleri temizle
@@ -648,15 +668,17 @@ jQuery(document).ready(function() {
     }
 
     setTimeout(() => {
-        createOptionsForSubcategorys('ISTANBUL', 'NÜFUS');
+        createOptionsForSubcategorys('ARTVIN', 'NÜFUS');
     });
     
     var isManualChange = false;
+    var isSelectClick = false;
     
     $('#map-citys').on('change', function() {
         if (!isManualChange) {
             var city = $("#map-citys option:selected").val();
             var cityNumber = $("#map-citys option:selected").index() + 1;
+            isSelectClick = true;
             $('.map-datas .right div#vmap svg >g path:nth-child(' + cityNumber + ')').click();
             processDataAndDisplay(city, memoFilteredData[1], memoFilteredData[2]);
         }
@@ -695,6 +717,7 @@ jQuery(document).ready(function() {
             normalizeFunction: 'polynomial',
             onRegionClick: function(element, code, region)
             {   
+                
                 isManualChange = true;
     
                 var region = region.toUpperCase();
@@ -718,13 +741,19 @@ jQuery(document).ready(function() {
                     region = region.replace(regExp, trMap[key]);
                 }
     
-                processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
-                createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
+                if (!isSelectClick) {
+                    processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
+                    createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
+                }
+                
                 $('#map-citys').val(region)
+                console.log(region);
+                
                 $('#map-citys').trigger('change')
                 
+                isSelectClick = false;
             }
         });
         
-    $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
+    // $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
 });
