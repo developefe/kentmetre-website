@@ -863,14 +863,21 @@ jQuery(document).ready(function () {
 
     var svgTurkeyMap = document.getElementById("svg-turkey-map").getElementsByTagName("path");
     var cityName = document.getElementById("city-name");
-    var mapSvg = $('.map-datas .right .map-container .map-holder svg').offset().top;
+    var mapSvgTop = $('.map-datas .right .map-container .map-holder').offset().top;
+    var mapSvgLeft = $('.map-datas .right .map-container .map-holder').offset().left;
+
+    // $(window).on('mousemove', function () {
+    //     console.log(event.pageX, event.pageY);
+    //     console.log(mapSvgTop, mapSvgLeft);
+    // });
 
     for (i = 0; i < svgTurkeyMap.length; i++) {
 
         svgTurkeyMap[i].addEventListener("mousemove", function () {
             cityName.classList.add("show-city-name--active");
-            cityName.style.left = (event.pageX - mapSvg + "px");
-            cityName.style.top = (event.pageY - mapSvg + "px")
+            cityName.style.left = (event.pageX -mapSvgLeft + "px");
+            cityName.style.top = (event.pageY - mapSvgTop - 50 + "px")
+            
             cityName.innerHTML = this.getAttribute("title");
         });
 
@@ -879,6 +886,9 @@ jQuery(document).ready(function () {
         });
 
         svgTurkeyMap[i].addEventListener("click", function () {
+            region = this.getAttribute("title");
+            dataCity = this.getAttribute("data-city-name");
+            
             isManualChange = true;
                 var region = region.toUpperCase();
                 var trMap = {
@@ -911,12 +921,14 @@ jQuery(document).ready(function () {
 
                 $('#map-citys').trigger('change')
 
+                $('.map-datas .right .map-container .map-holder svg path').css({fill: '#122763'});
+                $('.map-datas .right .map-container .map-holder svg path[data-city-name="'+dataCity+'"]').css({fill: '#2E9DFF'});
+
                 isSelectClick = false;
         });
-
     }
 
-    // $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
+    $('.map-datas .right .map-container .map-holder svg path[data-city-name="istanbul"]').css({fill: '#2E9DFF'});
 
 
     // Map and Datas Tab

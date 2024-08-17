@@ -1361,12 +1361,11 @@
   }
   .map-datas > img {
     position: absolute;
-    left: -1px;
-    right: 0;
-    top: -1px;
-    bottom: 0;
+    top: 0;
     z-index: -2;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   
   .map-datas:before {
@@ -1386,6 +1385,7 @@
 
 .map-datas .right .map-container .map-holder {
     width: 1000px;
+    position: relative;
 }
 
   .map-datas .right .map-container .city {
@@ -1399,7 +1399,7 @@
 }
 
 .map-datas .right .map-container .city:hover {
-  fill: #2E9DFF;
+  fill: #2E9DFF !important;
 }
 
   .map-datas .right .map-container .show-city-name {
@@ -3385,6 +3385,35 @@
     .contact .upper {
       padding: 160px 0;
     }
+    .map-datas {
+    flex-direction: column-reverse;
+    padding-top: 55px;
+    height: unset;
+}
+
+.map-datas .left {
+    width: 100%;
+    margin-bottom: 0;
+    height: 750px;
+    border-radius: 0 60px 60px 0;
+}
+
+.map-datas .right .map-container .map-holder {width: 100%;}
+
+.map-datas .right {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.map-datas .right .map-container {
+    width: 80%;
+}
+
+.map-datas .right .span {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+}
   }
   
   @media only screen and (max-width: 991px) {
@@ -4193,5 +4222,56 @@
     .sosyology-popup .texts .bottom p {
       font-size: 14px;
     }
+    .map-datas {
+    padding-top: 30px;
+}
+
+.map-datas .left .top {
+    padding: 0px 20px;
+}
+
+.map-datas .left .tab-content-links {
+    right: 20px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    font-size: 20px;
+}
+
+.map-datas .left .tab-content-links .link-item {
+    font-size: 12px;
+    padding: 9px 22px;
+}
+
+.select2-container .select2-selection--single .select2-selection__arrow {
+    width: 15px;
+    height: 11px;
+}
+
+.map-datas .left {
+    gap: 15px;
+    /* margin-bottom: 30px; */
+}
+
+.map-datas .left .tab-contents .tab-content {
+    padding: 0 20px;
+}
+
+.map-datas .left .chart-container {
+    gap: 15px;
+}
+
+.map-datas .right .span {
+    font-size: 22px;
+    width: 70%;
+    margin: 0 auto 35px;
+}
+
+.map-datas .right .map-container {
+    width: 90%;
+}
+    .map-datas .left .table-container table tbody tr td {
+    font-size: 11px;
+    padding: 15px 7px;
+}
   }
-  
