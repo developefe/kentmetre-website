@@ -1049,7 +1049,7 @@ jQuery(document).ready(function () {
 
         // Members Canvas
         let frameCount3 = 329,
-            urls3 = new Array(frameCount3).fill().map((o, i) => `assets/image-sequence/members/optimize/kişiler-düzeltme_${(i + 1).toString().padStart(5, '0')}.jpg`);
+            urls3 = new Array(frameCount3).fill().map((o, i) => `assets/image-sequence/members/ham/kişiler düzeltme_${(i + 1).toString().padStart(5, '0')}.jpg`);
 
         const canvas3 = document.getElementById("members-canvas");
         canvas3.width = window.innerWidth;
