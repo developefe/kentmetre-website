@@ -4,7 +4,14 @@
         "SEHIR": "ADANA",
         "KATEGORI": "EKONOMI",
         "ALT_KATEGORI": "CELIK",
-        "DEGER": 10913.93517
+        "DEGER": 102
+    },
+    {
+        "YIL": 2023,
+        "SEHIR": "ADANA",
+        "KATEGORI": "EKONOMI",
+        "ALT_KATEGORI": "CIMENTO",
+        "DEGER": 102
     },
     {
         "YIL": 2023,
@@ -17,28 +24,21 @@
         "YIL": 2022,
         "SEHIR": "ADANA",
         "KATEGORI": "EKONOMI",
-        "ALT_KATEGORI": "ARABA",
-        "DEGER": 23
+        "ALT_KATEGORI": "CELIK",
+        "DEGER": 98
     },
     {
         "YIL": 2022,
-        "SEHIR": "ISTANBUL",
+        "SEHIR": "ADANA",
         "KATEGORI": "EKONOMI",
-        "ALT_KATEGORI": "CELIK",
-        "DEGER": 29345
+        "ALT_KATEGORI": "CIMENTO",
+        "DEGER": 2932
     },
     {
-        "YIL": 2020,
-        "SEHIR": "BURSA",
+        "YIL": 2022,
+        "SEHIR": "ADANA",
         "KATEGORI": "NÜFUS",
         "ALT_KATEGORI": "HAYVANCILIK",
         "DEGER": 832
-    },
-    {
-        "YIL": 2021,
-        "SEHIR": "EDIRNE",
-        "KATEGORI": "EKONOMI",
-        "ALT_KATEGORI": "SILAH",
-        "DEGER": 4231
     }
 ]

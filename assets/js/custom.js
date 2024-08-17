@@ -544,6 +544,9 @@ jQuery(document).ready(function () {
             // type: 'datetime',
             categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
         },
+        legend: {
+            show: false
+        },
         tooltip: {
             theme: 'dark',
             x: {
@@ -621,9 +624,13 @@ jQuery(document).ready(function () {
             curve: 'smooth',
             width: 2,
         },
+        legend: {
+            show: false
+        },
         xaxis: {
             // type: 'datetime',
-            categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
+            categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015'],
+            
         },
         tooltip: {
             theme: 'dark',
@@ -661,15 +668,74 @@ jQuery(document).ready(function () {
         return data.sort((a, b) => b.YIL - a.YIL);
     }
 
+    function getSubCategoryData(data) {
+        const subCategoryData = {};
+        const years = [];
+    
+        // Tüm yılları toplamak
+        data.forEach(item => {
+            if (!years.includes(item.YIL)) {
+                years.push(item.YIL);
+            }
+        });
+    
+        // Yılları büyükten küçüğe sıralama
+        years.sort((a, b) => b - a);
+    
+        // Alt kategorileri toplamak ve eksik yılları "0.00" olarak set etmek
+        data.forEach(item => {
+            if (!subCategoryData[item.ALT_KATEGORI]) {
+                subCategoryData[item.ALT_KATEGORI] = years.map(() => "0.00");
+            }
+            const yearIndex = years.indexOf(item.YIL);
+            subCategoryData[item.ALT_KATEGORI][yearIndex] = parseFloat(item.DEGER).toFixed(2);
+        });
+    
+        // Alt kategorileri JSON formatına dönüştürme
+        const formattedData = Object.keys(subCategoryData).map(key => ({
+            name: key,
+            data: subCategoryData[key]
+        }));
+    
+        return {
+            formattedData,
+            years
+        };
+    }
+
+    var economyX;
+    var economyY;
+    var populationX;
+    var populationY;
+
+    async function fetchDataAndProcess(city, category) {
+        const data = await fetchData();
+        const filteredData = filterByCityAndCategory(data, city, category);
+        const sortedData = sortByYear(filteredData);
+
+        const result = getSubCategoryData(sortedData);
+        
+        if (category == 'EKONOMI') {
+            economyX = result.formattedData;
+            economyY = result.years;
+        }else if (category == 'NÜFUS') {
+            populationX = result.formattedData;
+            populationY = result.years;
+        }
+
+        console.log(result.formattedData);
+        console.log(result.years);
+    }
+
     // Filtrelenmiş veriyi tabloya ekleme fonksiyonu
     function updateTable(data) {
         const tableBody = $('#data-table-body');
         var totalCount;
         tableBody.empty(); // Önceki içeriği temizle
 
-        chartName = data[0].SEHIR;
-        chartSeriesData = [];
-        chartXAxisData = [];
+        // chartName = data[0].SEHIR;
+        // chartSeriesData = [];
+        // chartXAxisData = [];
 
         data.forEach((item, index) => {
             const row = `
@@ -684,27 +750,23 @@ jQuery(document).ready(function () {
             totalCount = index;
             tableBody.append(row);
 
-            chartSeriesData.push(item.DEGER.toLocaleString());
-            chartXAxisData.push(item.YIL);
+            // chartSeriesData.push(item.DEGER.toLocaleString());
+            // chartXAxisData.push(item.YIL);
         });
 
-        // chart.updateOptions({
-        //     xaxis: {
-        //        categories: chartXAxisData
-        //     },
-        //     series: [{
-        //        data: chartSeriesData
-        //     }],
-        //  });
+        chart.updateOptions({
+            xaxis: {
+                categories: economyY
+            },
+            series: economyX
+        });
 
-        //  chart2.updateOptions({
-        //     xaxis: {
-        //        categories: chartXAxisData
-        //     },
-        //     series: [{
-        //        data: chartSeriesData
-        //     }],
-        //  });
+        chart2.updateOptions({
+            xaxis: {
+                categories: populationY
+            },
+            series: populationX
+        });
 
         if (data.length == 0) {
             tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>")
@@ -725,6 +787,9 @@ jQuery(document).ready(function () {
         filteredData = sortByYear(filteredData);
         updateTable(filteredData);
     }
+
+    fetchDataAndProcess('ISTANBUL', 'EKONOMI')
+    fetchDataAndProcess('ISTANBUL', 'NÜFUS')
     processDataAndDisplay('ISTANBUL', 'EKONOMI', 'TUMU')
 
     // Select
@@ -787,6 +852,8 @@ jQuery(document).ready(function () {
             var cityNumber = $("#map-citys option:selected").index() + 1;
             isSelectClick = true;
             $('.map-datas .right div#vmap svg >g path:nth-child(' + cityNumber + ')').click();
+            fetchDataAndProcess(city, 'EKONOMI')
+            fetchDataAndProcess(city, 'NÜFUS')
             processDataAndDisplay(city, memoFilteredData[1], memoFilteredData[2]);
         }
 
@@ -875,9 +942,9 @@ jQuery(document).ready(function () {
 
         svgTurkeyMap[i].addEventListener("mousemove", function () {
             cityName.classList.add("show-city-name--active");
-            cityName.style.left = (event.pageX -mapSvgLeft + "px");
+            cityName.style.left = (event.pageX - mapSvgLeft + "px");
             cityName.style.top = (event.pageY - mapSvgTop - 50 + "px")
-            
+
             cityName.innerHTML = this.getAttribute("title");
         });
 
@@ -888,47 +955,49 @@ jQuery(document).ready(function () {
         svgTurkeyMap[i].addEventListener("click", function () {
             region = this.getAttribute("title");
             dataCity = this.getAttribute("data-city-name");
-            
+
             isManualChange = true;
-                var region = region.toUpperCase();
-                var trMap = {
-                    'ç': 'c',
-                    'Ç': 'C',
-                    'ğ': 'g',
-                    'Ğ': 'G',
-                    'ş': 's',
-                    'Ş': 'S',
-                    'ü': 'u',
-                    'Ü': 'U',
-                    'ı': 'i',
-                    'İ': 'I',
-                    'ö': 'o',
-                    'Ö': 'O'
-                };
+            var region = region.toUpperCase();
+            var trMap = {
+                'ç': 'c',
+                'Ç': 'C',
+                'ğ': 'g',
+                'Ğ': 'G',
+                'ş': 's',
+                'Ş': 'S',
+                'ü': 'u',
+                'Ü': 'U',
+                'ı': 'i',
+                'İ': 'I',
+                'ö': 'o',
+                'Ö': 'O'
+            };
 
-                for (var key in trMap) {
-                    var regExp = new RegExp(key, 'g');
-                    region = region.replace(regExp, trMap[key]);
-                }
+            for (var key in trMap) {
+                var regExp = new RegExp(key, 'g');
+                region = region.replace(regExp, trMap[key]);
+            }
 
-                if (!isSelectClick) {
-                    processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
-                    // createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
-                }
+            if (!isSelectClick) {
+                fetchDataAndProcess(region, 'EKONOMI')
+                fetchDataAndProcess(region, 'NÜFUS')
+                processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
+                // createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
+            }
 
-                $('#map-citys').val(region)
-                console.log(region);
+            $('#map-citys').val(region)
+            console.log(region);
 
-                $('#map-citys').trigger('change')
+            $('#map-citys').trigger('change')
 
-                $('.map-datas .right .map-container .map-holder svg path').css({fill: '#122763'});
-                $('.map-datas .right .map-container .map-holder svg path[data-city-name="'+dataCity+'"]').css({fill: '#2E9DFF'});
+            $('.map-datas .right .map-container .map-holder svg path').css({ fill: '#122763' });
+            $('.map-datas .right .map-container .map-holder svg path[data-city-name="' + dataCity + '"]').css({ fill: '#2E9DFF' });
 
-                isSelectClick = false;
+            isSelectClick = false;
         });
     }
 
-    $('.map-datas .right .map-container .map-holder svg path[data-city-name="istanbul"]').css({fill: '#2E9DFF'});
+    $('.map-datas .right .map-container .map-holder svg path[data-city-name="istanbul"]').css({ fill: '#2E9DFF' });
 
 
     // Map and Datas Tab
