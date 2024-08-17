@@ -436,7 +436,7 @@ $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', funct
 
 
 
-    // GSAP ve ScrollTrigger'ın yüklü olduğundan emin olun
+// GSAP ve ScrollTrigger'ın yüklü olduğundan emin olun
 // gsap.registerPlugin(ScrollTrigger);
 
 // // Video elementini seçin
@@ -477,7 +477,7 @@ var options = {
     series: [{
         name: 'Çelik',
         data: [42, 52, 45, 63, 26, 37, 25, 12, 18]
-    },{
+    }, {
         name: 'Çimento',
         data: [20, 14, 25, 45, 53, 24, 65, 21, 64]
     },],
@@ -691,7 +691,7 @@ function updateTable(data) {
     }
 
     $('.map-datas .left .table-container table thead tr th:nth-child(4) span').remove();
-    $('.map-datas .left .table-container table thead tr th:nth-child(4)').append('<span>('+ (totalCount ? totalCount : 0) +')</span>')
+    $('.map-datas .left .table-container table thead tr th:nth-child(4)').append('<span>(' + (totalCount ? totalCount : 0) + ')</span>')
 }
 
 // Veriyi işleme ve tabloya bastırma
@@ -714,7 +714,7 @@ $(document).ready(function () {
     // $('#map-category').select2();
 });
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     // Verileri fetch etme fonksiyonu
     // async function fetchSubCategorys(region, category) {
     //     // Örneğin, JSON verilerini fetch ediyoruz (burada JSON verisi simüle edilmiştir)
@@ -760,11 +760,11 @@ jQuery(document).ready(function() {
     // setTimeout(() => {
     //     createOptionsForSubcategorys('ARTVIN', 'NÜFUS');
     // });
-    
+
     var isManualChange = false;
     var isSelectClick = false;
-    
-    $('#map-citys').on('change', function() {
+
+    $('#map-citys').on('change', function () {
         if (!isManualChange) {
             var city = $("#map-citys option:selected").val();
             var cityNumber = $("#map-citys option:selected").index() + 1;
@@ -777,13 +777,13 @@ jQuery(document).ready(function() {
 
         isManualChange = false;
     });
-    
+
     // $('#map-category').on('change', function() {
     //     var category = $("#map-category option:selected").val();
     //     processDataAndDisplay(memoFilteredData[0], category, memoFilteredData[2])
     //     createOptionsForSubcategorys(memoFilteredData[0], category, memoFilteredData[2])
     // });
-    
+
     // $('#map-subcategory').on('change', function() {
     //     var subcategory = $("#map-subcategory option:selected").val();
     //     processDataAndDisplay(memoFilteredData[0], memoFilteredData[1], subcategory)
@@ -805,62 +805,157 @@ jQuery(document).ready(function() {
             selectedRegion: null,
             showTooltip: true,
             normalizeFunction: 'polynomial',
-            onRegionClick: function(element, code, region)
-            {   
-                
+            onRegionClick: function (element, code, region) {
+
                 isManualChange = true;
-    
+
                 var region = region.toUpperCase();
                 var trMap = {
-                    'ç':'c',
-                    'Ç':'C',
-                    'ğ':'g',
-                    'Ğ':'G',
-                    'ş':'s',
-                    'Ş':'S',
-                    'ü':'u',
-                    'Ü':'U',
-                    'ı':'i',
-                    'İ':'I',
-                    'ö':'o',
-                    'Ö':'O'
+                    'ç': 'c',
+                    'Ç': 'C',
+                    'ğ': 'g',
+                    'Ğ': 'G',
+                    'ş': 's',
+                    'Ş': 'S',
+                    'ü': 'u',
+                    'Ü': 'U',
+                    'ı': 'i',
+                    'İ': 'I',
+                    'ö': 'o',
+                    'Ö': 'O'
                 };
-    
+
                 for (var key in trMap) {
                     var regExp = new RegExp(key, 'g');
                     region = region.replace(regExp, trMap[key]);
                 }
-    
+
                 if (!isSelectClick) {
                     processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
                     // createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
                 }
-                
+
                 $('#map-citys').val(region)
                 console.log(region);
-                
+
                 $('#map-citys').trigger('change')
-                
+
                 isSelectClick = false;
             }
         });
-        
+
     $('.map-datas .right div#vmap svg >g path:nth-child(34)').click();
 });
 
-// 
+// ImageSequence Function
+function imageSequence(config) {
+    let playhead = { frame: 0 },
+        canvas = gsap.utils.toArray(config.canvas)[0] || console.warn("canvas not defined"),
+        ctx = canvas.getContext("2d"),
+        curFrame = -1,
+        onUpdate = config.onUpdate,
+        images = [],
+        loadedImages = 0,
+        updateImage = function () {
+            let frame = Math.round(playhead.frame);
+            if (frame !== curFrame) {
+                config.clear && ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(images[frame], 0, 0, canvas.width, canvas.height);
+                curFrame = frame;
+                onUpdate && onUpdate.call(this, frame, images[frame]);
+            }
+        };
 
-// const video2 = document.getElementById('videoxx');
-// const totalScrollHeightd = document.body.scrollHeight - window.innerHeight;
+    // IntersectionObserver to lazy-load images
+    let observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                config.urls.forEach((url, i) => {
+                    let img = new Image();
+                    img.src = url;
+                    img.onload = () => {
+                        loadedImages++;
+                        images[i] = img;
+                        if (loadedImages === config.urls.length) {
+                            updateImage();
+                        }
+                    };
+                });
+                observer.disconnect(); // Stop observing after images are loaded
+            }
+        });
+    });
 
-// // Kaydırma sırasında çalışacak olay
-// window.addEventListener('scroll', function () {
-//     const scrollTops = window.scrollY;
-//     const scrollFractions = scrollTops / totalScrollHeightd;
-//     const videoDuration2 = video2.duration;
+    observer.observe(canvas);
 
-//     video2.currentTime = scrollFractions * videoDuration2;
-// });
+    return gsap.to(playhead, {
+        frame: config.urls.length - 1,
+        ease: "none",
+        onUpdate: updateImage,
+        duration: config.urls.length / (config.fps || 30),
+        paused: !!config.paused,
+        scrollTrigger: config.scrollTrigger
+    });
+}
+// Hero Canvas
+let frameCount = 95,
+    urls = new Array(frameCount).fill().map((o, i) => `assets/video-resim/Giriş Sonrası_${(i + 1).toString().padStart(5, '0')}.jpg`);
+
+const canvas = document.getElementById("hero-canvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+imageSequence({
+    urls,
+    canvas: "#hero-canvas",
+    scrollTrigger: {
+        trigger: ".main .entrance",
+        start: "top top",
+        endTrigger: ".company-achievements",
+        end: "bottom bottom",
+        scrub: true,
+    }
+});
+
+// About Canvas
+let frameCount2 = 95,
+    urls2 = new Array(frameCount2).fill().map((o, i) => `assets/video-resim/Giriş Sonrası_${(i + 1).toString().padStart(5, '0')}.jpg`);
+
+const canvas2 = document.getElementById("about-canvas");
+canvas2.width = window.innerWidth;
+canvas2.height = window.innerHeight;
+
+imageSequence({
+    urls: urls2,
+    canvas: "#about-canvas",
+    scrollTrigger: {
+        trigger: ".about-vid",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+    }
+});
+
+// Members Canvas
+let frameCount3 = 95,
+    urls3 = new Array(frameCount3).fill().map((o, i) => `assets/video-resim/Giriş Sonrası_${(i + 1).toString().padStart(5, '0')}.jpg`);
+
+const canvas3 = document.getElementById("members-canvas");
+canvas3.width = window.innerWidth;
+canvas3.height = window.innerHeight;
+
+imageSequence({
+    urls: urls3,
+    canvas: "#members-canvas",
+    scrollTrigger: {
+        trigger: ".members-vid",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+    }
+});
+
+
 
 // Map and Datas Tab
 
