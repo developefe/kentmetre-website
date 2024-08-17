@@ -216,6 +216,11 @@
         <div class="map-datas">
             <img src="assets/img/map-bg.svg" alt="">
             <div class="left">
+                <div class="tab-content-links">
+                    <div class="link-item active">Grafik</div>
+                    <div class="link-item">Tablo</div>
+                    <div class="blob"></div>
+                </div>
                 <div class="top">
                     <select class="custom-select" id="map-citys" name="state">
                         <option value="ADANA">Adana</option>
@@ -300,46 +305,52 @@
                         <option value="OSMANIYE">Osmaniye</option>
                         <option value="DUZCE">Düzce</option>
                     </select>
-                    <div class="select-decor">/ %</div>
+                    <!-- <div class="select-decor">/ %</div> -->
                 </div>
-                <div class="chart-container">
-                    <div id="chart"></div>
-                    <div id="chart-2"></div>
-                </div>
-                <!-- <div class="filter">
-                    <div class="filter-item"> 
-                        <select class="custom-select" id="map-category" name="state">
-                            <option value="NÜFUS">Nüfus</option>
-                            <option value="EKONOMI">Ekonomi</option>
-                        </select>
-                        <span>İçin Listelenen Bu Dizinde,</span></div>
-                    <div class="filter-item">
-                        <select class="custom-select" id="map-subcategory" name="state">
-                            <option value="TUMU">Tümü</option>
-                            <option value="asd">Su Ürünleri ve Hayvansal Mamüller</option>
-                        </select>
-                        <span>Alt Kategorisi Listelenir.</span></div>
-                </div> -->
-                <div class="table-container">
-                    <div class="table-overflow">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>YIL</th>
-                                    <th>İL</th>
-                                    <th>KATEGORİ</th>
-                                    <th>ALT KATEGORİ</th>
-                                    <th>DEĞER</th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-table-body"></tbody>
-                        </table>
+                <div class="tab-contents">
+                    <div class="tab-content active">
+                        <div class="chart-container">
+                            <div id="chart"></div>
+                            <div id="chart-2"></div>
+                        </div>
+                        <!-- <div class="filter">
+                            <div class="filter-item"> 
+                                <select class="custom-select" id="map-category" name="state">
+                                    <option value="NÜFUS">Nüfus</option>
+                                    <option value="EKONOMI">Ekonomi</option>
+                                </select>
+                                <span>İçin Listelenen Bu Dizinde,</span></div>
+                            <div class="filter-item">
+                                <select class="custom-select" id="map-subcategory" name="state">
+                                    <option value="TUMU">Tümü</option>
+                                    <option value="asd">Su Ürünleri ve Hayvansal Mamüller</option>
+                                </select>
+                                <span>Alt Kategorisi Listelenir.</span></div>
+                        </div> -->
+                    </div>
+                    <div class="tab-content">
+                        <div class="table-container">
+                            <div class="table-overflow">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>YIL</th>
+                                            <th>İL</th>
+                                            <th>KATEGORİ</th>
+                                            <th>ALT KATEGORİ</th>
+                                            <th>DEĞER</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="right">
                 <div class="map-container">
-                    <div class="span">Endüstri Ayak Trafiği Eyilim Tablosu</div>
+                    <div class="span">Endüstri Ayak Trafiği Eğilim Tablosu</div>
                     <div id="vmap"></div>
                 </div>
             </div>

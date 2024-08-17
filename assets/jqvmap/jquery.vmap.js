@@ -243,7 +243,7 @@
 
     applyTransformParams: function (scale, transX, transY) {
       if (this.mode == 'svg') {
-        this.rootGroup.setAttribute('transform', 'scale(' + scale + ') translate(' + transX + ', ' + transY + ')');
+        this.rootGroup.setAttribute('transform', 'scale(' + scale + ') translate(' + (transX-22) + ', ' + (transY-120) + ')');
       } else {
         this.rootGroup.coordorigin = (this.width - transX) + ',' + (this.height - transY);
         this.rootGroup.coordsize = this.width / scale + ',' + this.height / scale;

@@ -184,23 +184,21 @@ servicesSlideHeadline.controller.control = [servicesVid, servicesNum, servicesIm
 
 $('.brands .bottom').height($('.brands .bottom .tab-content:nth-child(1)').height());
 
-var blob = $('.brands .top .tab-links .hover-blob');
-
-function positionBlob(el) {
+function positionBlob(blob, el, container) {
     var w = el.outerWidth();
     var h = el.outerHeight();
-    var x = el.offset().left - $('.brands .top .tab-links').offset().left;
-    var y = el.offset().top - $('.brands .top .tab-links').offset().top;
+    var x = el.offset().left - container.offset().left;
+    var y = el.offset().top - container.offset().top;
 
     blob.css({ width: w, height: h, left: x + "px", top: y + "px" });
 }
 
-positionBlob($('.brands .top .tab-links .link-item:nth-child(1)'));
+positionBlob($('.brands .top .tab-links .hover-blob'), $('.brands .top .tab-links .link-item:nth-child(1)'), $('.brands .top .tab-links'));
 
 $('.brands .top .tab-links .link-item').on('click', function () {
     var index = $(this).index();
 
-    positionBlob($(this));
+    positionBlob($('.brands .top .tab-links .hover-blob'), $(this), $('.brands .top .tab-links'));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 
@@ -600,7 +598,7 @@ var options = {
         enabled: false
     },
     stroke: {
-        curve: 'straight',
+        curve: 'smooth',
         width: 2,
     },
     xaxis: {
@@ -863,3 +861,19 @@ jQuery(document).ready(function() {
 
 //     video2.currentTime = scrollFractions * videoDuration2;
 // });
+
+// Map and Datas Tab
+
+positionBlob($('.map-datas .left .tab-content-links .blob'), $('.map-datas .left .tab-content-links .link-item:nth-child(1)'), $('.map-datas .left .tab-content-links'));
+
+$('.map-datas .left .tab-content-links .link-item').on('click', function () {
+    var index = $(this).index();
+
+    positionBlob($('.map-datas .left .tab-content-links .blob'), $(this), $('.map-datas .left .tab-content-links'));
+
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+
+    $('.map-datas .left .tab-contents .tab-content:nth-child(' + (index + 1) + ')').addClass('active').siblings().removeClass('active');
+    // $('.map-datas .left .tab-contents').height($('.map-datas .left .tab-contents .tab-content:nth-child(' + (index + 1) + ')').height());
+});
