@@ -1,7 +1,7 @@
 // Javascript
 jQuery(document).ready(function () {
     setTimeout(() => {
-        $(window).scrollTop(0)
+        // $(window).scrollTop(0)
 
         // Header
 
@@ -269,6 +269,15 @@ jQuery(document).ready(function () {
             }, 600);
         }
 
+        $('.who-are-we .bottom .right .see-all .down-button').on('click', function () {
+            $('html, body').animate({ scrollTop: $('.services-slider').offset().top - 30 }, 1000)
+        });
+
+
+        $('.entrance .slider-props .right .top .scroll-down .down-button').on('click', function () {
+            $('html, body').animate({ scrollTop: $('.who-are-we').offset().top - 10 }, 1000)
+        });
+
         if ($(window).width() > 991) {
             $('header .logo').on('click', function () {
                 $('html, body').animate({ scrollTop: 0 }, 1000)
@@ -534,7 +543,7 @@ jQuery(document).ready(function () {
                 //     }
                 //   }
             },
-            colors: ['#131F5B', '#212b5d', '#2b397c', '#36479b', '#4155ba', '#5e70c7', '#7d8bd1', '#9ca7dc', '#bbc2e7', '#dadef2', '#edeff8'],
+            colors: ["#F2A365", "#F7CE68", "#FF6F61", "#F7D794", "#F4A261", "#FFE066", "#9AECDB", "#E8DAEF", "#F1C40F", "#F7CAC9", "#8D8741", "#85C1E9", "#F0B27A", "#D6EAF8", "#D1F2EB", "#D4EFDF", "#F5CBA7", "#F1948A", "#F8C471", "#7DCEA0", "#FAD7A0", "#F7DC6F", "#FCF3CF", "#82E0AA", "#E59866", "#AED6F1", "#D7BDE2", "#F9E79F", "#FADBD8", "#D98880"],
             dataLabels: {
                 enabled: false
             },
@@ -547,9 +556,11 @@ jQuery(document).ready(function () {
                 categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
             },
             legend: {
-            show: false
-        },
-        tooltip: {
+                show: false,
+                fontSize: 10,
+                color: 'white'
+            },
+            tooltip: {
                 theme: 'dark',
                 x: {
                     format: 'dd/MM/yy HH:mm'
@@ -618,7 +629,7 @@ jQuery(document).ready(function () {
                 //     }
                 //   }
             },
-            colors: ['#131F5B', '#212b5d', '#2b397c', '#36479b', '#4155ba', '#5e70c7', '#7d8bd1', '#9ca7dc', '#bbc2e7', '#dadef2', '#edeff8'],
+            colors: ["#F2A365", "#F7CE68", "#FF6F61", "#F7D794", "#F4A261", "#FFE066", "#9AECDB", "#E8DAEF", "#F1C40F", "#F7CAC9", "#8D8741", "#85C1E9", "#F0B27A", "#D6EAF8", "#D1F2EB", "#D4EFDF", "#F5CBA7", "#F1948A", "#F8C471", "#7DCEA0", "#FAD7A0", "#F7DC6F", "#FCF3CF", "#82E0AA", "#E59866", "#AED6F1", "#D7BDE2", "#F9E79F", "#FADBD8", "#D98880"],
             dataLabels: {
                 enabled: false
             },
@@ -627,12 +638,14 @@ jQuery(document).ready(function () {
                 width: 2,
             },
             legend: {
-            show: false
-        },
-        xaxis: {
+                show: false,
+                fontSize: 10,
+                color: 'white'
+            },
+            xaxis: {
                 // type: 'datetime',
                 categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015'],
-            
+
             },
             tooltip: {
                 theme: 'dark',
@@ -649,7 +662,7 @@ jQuery(document).ready(function () {
 
         // JSON dosyasını yükleme fonksiyonu
         async function fetchData() {
-            const response = await fetch('assets/datas/map-datas.json'); // JSON dosyasının yolu
+            const response = await fetch('assets/datas/map-datas-2.json'); // JSON dosyasının yolu
             const data = await response.json();
             return data;
         }
@@ -670,64 +683,64 @@ jQuery(document).ready(function () {
             return data.sort((a, b) => b.YIL - a.YIL);
         }
 
-    function getSubCategoryData(data) {
-        const subCategoryData = {};
-        const years = [];
-    
-        // Tüm yılları toplamak
-        data.forEach(item => {
-            if (!years.includes(item.YIL)) {
-                years.push(item.YIL);
-            }
-        });
-    
-        // Yılları büyükten küçüğe sıralama
-        years.sort((a, b) => b - a);
-    
-        // Alt kategorileri toplamak ve eksik yılları "0.00" olarak set etmek
-        data.forEach(item => {
-            if (!subCategoryData[item.ALT_KATEGORI]) {
-                subCategoryData[item.ALT_KATEGORI] = years.map(() => "0.00");
-            }
-            const yearIndex = years.indexOf(item.YIL);
-            subCategoryData[item.ALT_KATEGORI][yearIndex] = parseFloat(item.DEGER).toFixed(2);
-        });
-    
-        // Alt kategorileri JSON formatına dönüştürme
-        const formattedData = Object.keys(subCategoryData).map(key => ({
-            name: key,
-            data: subCategoryData[key]
-        }));
-    
-        return {
-            formattedData,
-            years
-        };
-    }
+        function getSubCategoryData(data) {
+            const subCategoryData = {};
+            const years = [];
 
-    var economyX;
-    var economyY;
-    var populationX;
-    var populationY;
+            // Tüm yılları toplamak
+            data.forEach(item => {
+                if (!years.includes(item.YIL)) {
+                    years.push(item.YIL);
+                }
+            });
 
-    async function fetchDataAndProcess(city, category) {
-        const data = await fetchData();
-        const filteredData = filterByCityAndCategory(data, city, category);
-        const sortedData = sortByYear(filteredData);
+            // Yılları büyükten küçüğe sıralama
+            years.sort((a, b) => a - b);
 
-        const result = getSubCategoryData(sortedData);
-        
-        if (category == 'EKONOMI') {
-            economyX = result.formattedData;
-            economyY = result.years;
-        }else if (category == 'NÜFUS') {
-            populationX = result.formattedData;
-            populationY = result.years;
+            // Alt kategorileri toplamak ve eksik yılları "0.00" olarak set etmek
+            data.forEach(item => {
+                if (!subCategoryData[item.ALT_KATEGORI]) {
+                    subCategoryData[item.ALT_KATEGORI] = years.map(() => "0.00");
+                }
+                const yearIndex = years.indexOf(item.YIL);
+                subCategoryData[item.ALT_KATEGORI][yearIndex] = parseFloat(item.DEGER).toFixed(2);
+            });
+
+            // Alt kategorileri JSON formatına dönüştürme
+            const formattedData = Object.keys(subCategoryData).map(key => ({
+                name: key,
+                data: subCategoryData[key]
+            }));
+
+            return {
+                formattedData,
+                years
+            };
         }
 
-        console.log(result.formattedData);
-        console.log(result.years);
-    }
+        var economyX;
+        var economyY;
+        var populationX;
+        var populationY;
+
+        async function fetchDataAndProcess(city, category) {
+            const data = await fetchData();
+            const filteredData = filterByCityAndCategory(data, city, category);
+            const sortedData = sortByYear(filteredData);
+
+            const result = getSubCategoryData(sortedData);
+
+            if (category == 'EKONOMI') {
+                economyX = result.formattedData;
+                economyY = result.years;
+            } else if (category == 'NÜFUS') {
+                populationX = result.formattedData;
+                populationY = result.years;
+            }
+
+            console.log(result.formattedData);
+            console.log(result.years);
+        }
 
         // Filtrelenmiş veriyi tabloya ekleme fonksiyonu
         function updateTable(data) {
@@ -735,9 +748,9 @@ jQuery(document).ready(function () {
             var totalCount;
             tableBody.empty(); // Önceki içeriği temizle
 
-        // chartName = data[0].SEHIR;
-        // chartSeriesData = [];
-        // chartXAxisData = [];
+            // chartName = data[0].SEHIR;
+            // chartSeriesData = [];
+            // chartXAxisData = [];
 
             data.forEach((item, index) => {
                 const row = `
@@ -752,23 +765,23 @@ jQuery(document).ready(function () {
                 totalCount = index;
                 tableBody.append(row);
 
-            // chartSeriesData.push(item.DEGER.toLocaleString());
-            // chartXAxisData.push(item.YIL);
-        });
+                // chartSeriesData.push(item.DEGER.toLocaleString());
+                // chartXAxisData.push(item.YIL);
+            });
 
-        chart.updateOptions({
-            xaxis: {
-                categories: economyY
-            },
-            series: economyX
-        });
+            chart.updateOptions({
+                xaxis: {
+                    categories: economyY
+                },
+                series: economyX
+            });
 
-        chart2.updateOptions({
-            xaxis: {
-                categories: populationY
-            },
-            series: populationX
-        });
+            chart2.updateOptions({
+                xaxis: {
+                    categories: populationY
+                },
+                series: populationX
+            });
 
             if (data.length == 0) {
                 tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>")
@@ -784,15 +797,17 @@ jQuery(document).ready(function () {
         async function processDataAndDisplay(city, category, subCategory) {
             memoFilteredData = [city, category, subCategory]
 
-        const data = await fetchData();
-        let filteredData = filterByCityAndCategory(data, memoFilteredData[0], memoFilteredData[1], memoFilteredData[2]);
-        filteredData = sortByYear(filteredData);
-        updateTable(filteredData);
-    }
+            const data = await fetchData();
+            let filteredData = filterByCityAndCategory(data, memoFilteredData[0], memoFilteredData[1], memoFilteredData[2]);
+            filteredData = sortByYear(filteredData);
+            updateTable(filteredData);
+        }
 
-    fetchDataAndProcess('ISTANBUL', 'EKONOMI')
-    fetchDataAndProcess('ISTANBUL', 'NÜFUS')
-    processDataAndDisplay('ISTANBUL', 'EKONOMI', 'TUMU')
+        setTimeout(() => {
+            fetchDataAndProcess('ISTANBUL', 'EKONOMI')
+            fetchDataAndProcess('ISTANBUL', 'NÜFUS')
+            processDataAndDisplay('ISTANBUL', 'EKONOMI', 'TUMU')
+        }, 500);
 
         // Select
 
@@ -848,16 +863,16 @@ jQuery(document).ready(function () {
         var isManualChange = false;
         var isSelectClick = false;
 
-    $('#map-citys').on('change', function () {
-        if (!isManualChange) {
-            var city = $("#map-citys option:selected").val();
-            var cityNumber = $("#map-citys option:selected").index() + 1;
-            isSelectClick = true;
-            $('.map-datas .right div#vmap svg >g path:nth-child(' + cityNumber + ')').click();
-            fetchDataAndProcess(city, 'EKONOMI')
-            fetchDataAndProcess(city, 'NÜFUS')
-            processDataAndDisplay(city, memoFilteredData[1], memoFilteredData[2]);
-        }
+        $('#map-citys').on('change', function () {
+            if (!isManualChange) {
+                var city = $("#map-citys option:selected").val();
+                var cityNumber = $("#map-citys option:selected").index() + 1;
+                isSelectClick = true;
+                $('.map-datas .right div#vmap svg >g path:nth-child(' + cityNumber + ')').click();
+                fetchDataAndProcess(city, 'EKONOMI')
+                fetchDataAndProcess(city, 'NÜFUS')
+                processDataAndDisplay(city, memoFilteredData[1], memoFilteredData[2]);
+            }
 
             // createOptionsForSubcategorys(city, memoFilteredData[1], memoFilteredData[2])
 
@@ -930,76 +945,76 @@ jQuery(document).ready(function () {
         //         }
         //     });
 
-    var svgTurkeyMap = document.getElementById("svg-turkey-map").getElementsByTagName("path");
-    var cityName = document.getElementById("city-name");
-    var mapSvgTop = $('.map-datas .right .map-container .map-holder').offset().top;
-    var mapSvgLeft = $('.map-datas .right .map-container .map-holder').offset().left;
+        var svgTurkeyMap = document.getElementById("svg-turkey-map").getElementsByTagName("path");
+        var cityName = document.getElementById("city-name");
+        var mapSvgTop = $('.map-datas .right .map-container .map-holder').offset().top;
+        var mapSvgLeft = $('.map-datas .right .map-container .map-holder').offset().left;
 
-    // $(window).on('mousemove', function () {
-    //     console.log(event.pageX, event.pageY);
-    //     console.log(mapSvgTop, mapSvgLeft);
-    // });
+        // $(window).on('mousemove', function () {
+        //     console.log(event.pageX, event.pageY);
+        //     console.log(mapSvgTop, mapSvgLeft);
+        // });
 
         for (i = 0; i < svgTurkeyMap.length; i++) {
 
-        svgTurkeyMap[i].addEventListener("mousemove", function () {
-            cityName.classList.add("show-city-name--active");
-            cityName.style.left = (event.pageX - mapSvgLeft + "px");
-            cityName.style.top = (event.pageY - mapSvgTop - 50 + "px")
+            svgTurkeyMap[i].addEventListener("mousemove", function () {
+                cityName.classList.add("show-city-name--active");
+                cityName.style.left = (event.pageX - mapSvgLeft + "px");
+                cityName.style.top = (event.pageY - mapSvgTop - 50 + "px")
 
-            cityName.innerHTML = this.getAttribute("title");
-        });
+                cityName.innerHTML = this.getAttribute("title");
+            });
 
             svgTurkeyMap[i].addEventListener("mouseleave", function () {
                 cityName.classList.remove("show-city-name--active");
             });
 
-        svgTurkeyMap[i].addEventListener("click", function () {
-            region = this.getAttribute("title");
-            dataCity = this.getAttribute("data-city-name");
+            svgTurkeyMap[i].addEventListener("click", function () {
+                region = this.getAttribute("title");
+                dataCity = this.getAttribute("data-city-name");
 
-            isManualChange = true;
-            var region = region.toUpperCase();
-            var trMap = {
-                'ç': 'c',
-                'Ç': 'C',
-                'ğ': 'g',
-                'Ğ': 'G',
-                'ş': 's',
-                'Ş': 'S',
-                'ü': 'u',
-                'Ü': 'U',
-                'ı': 'i',
-                'İ': 'I',
-                'ö': 'o',
-                'Ö': 'O'
-            };
+                isManualChange = true;
+                var region = region.toUpperCase();
+                var trMap = {
+                    'ç': 'c',
+                    'Ç': 'C',
+                    'ğ': 'g',
+                    'Ğ': 'G',
+                    'ş': 's',
+                    'Ş': 'S',
+                    'ü': 'u',
+                    'Ü': 'U',
+                    'ı': 'i',
+                    'İ': 'I',
+                    'ö': 'o',
+                    'Ö': 'O'
+                };
 
-            for (var key in trMap) {
-                var regExp = new RegExp(key, 'g');
-                region = region.replace(regExp, trMap[key]);
-            }
+                for (var key in trMap) {
+                    var regExp = new RegExp(key, 'g');
+                    region = region.replace(regExp, trMap[key]);
+                }
 
-            if (!isSelectClick) {
-                fetchDataAndProcess(region, 'EKONOMI')
-                fetchDataAndProcess(region, 'NÜFUS')
-                processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
-                // createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
-            }
+                if (!isSelectClick) {
+                    fetchDataAndProcess(region, 'EKONOMI')
+                    fetchDataAndProcess(region, 'NÜFUS')
+                    processDataAndDisplay(region, memoFilteredData[1], memoFilteredData[2]);
+                    // createOptionsForSubcategorys(region, memoFilteredData[1], memoFilteredData[2] )
+                }
 
-            $('#map-citys').val(region)
-            console.log(region);
+                $('#map-citys').val(region)
+                console.log(region);
 
-            $('#map-citys').trigger('change')
+                $('#map-citys').trigger('change')
 
-            $('.map-datas .right .map-container .map-holder svg path').css({ fill: '#122763' });
-            $('.map-datas .right .map-container .map-holder svg path[data-city-name="' + dataCity + '"]').css({ fill: '#2E9DFF' });
+                $('.map-datas .right .map-container .map-holder svg path').css({ fill: '#122763' });
+                $('.map-datas .right .map-container .map-holder svg path[data-city-name="' + dataCity + '"]').css({ fill: '#2E9DFF' });
 
-            isSelectClick = false;
-        });
-    }
+                isSelectClick = false;
+            });
+        }
 
-    $('.map-datas .right .map-container .map-holder svg path[data-city-name="istanbul"]').css({ fill: '#2E9DFF' });
+        $('.map-datas .right .map-container .map-holder svg path[data-city-name="istanbul"]').css({ fill: '#2E9DFF' });
 
 
         // Map and Datas Tab
@@ -1018,134 +1033,159 @@ jQuery(document).ready(function () {
             // $('.map-datas .left .tab-contents').height($('.map-datas .left .tab-contents .tab-content:nth-child(' + (index + 1) + ')').height());
         });
 
-        // ImageSequence Function
-        function imageSequence(config) {
-            let playhead = {
-                frame: 0
-            },
-                canvas = gsap
-                    .utils
-                    .toArray(config.canvas)[0] || console.warn("canvas not defined"),
-                ctx = canvas.getContext("2d"),
-                curFrame = -1,
-                onUpdate = config.onUpdate,
-                images,
-                updateImage = function () {
-                    let frame = Math.round(playhead.frame);
-                    if (frame !== curFrame) {
-                        config.clear && ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(images[Math.round(playhead.frame)], 0, 0, canvas.width, canvas.height);
-                        curFrame = frame;
-                        onUpdate && onUpdate.call(this, frame, images[frame]);
-                    }
-                };
-            images = config
-                .urls
-                .map((url, i) => {
-                    let img = new Image();
-                    img.src = url;
-                    i || (img.onload = updateImage);
-                    return img;
+
+        if ($(window).width() >= 1200) {
+            // ImageSequence Function
+            function imageSequence(config, startFrame = 0) {
+                let playhead = {
+                    frame: startFrame
+                },
+                    canvas = gsap
+                        .utils
+                        .toArray(config.canvas)[0] || console.warn("canvas not defined"),
+                    ctx = canvas.getContext("2d"),
+                    curFrame = -1,
+                    onUpdate = config.onUpdate,
+                    images,
+                    updateImage = function () {
+                        let frame = Math.round(playhead.frame);
+                        if (frame !== curFrame) {
+                            config.clear && ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            ctx.drawImage(images[Math.round(playhead.frame)], 0, 0, canvas.width, canvas.height);
+                            curFrame = frame;
+                            onUpdate && onUpdate.call(this, frame, images[frame]);
+                        }
+                    };
+                images = config
+                    .urls
+                    .map((url, i) => {
+                        let img = new Image();
+                        img.src = url;
+                        i || (img.onload = updateImage);
+                        return img;
+                    });
+                return gsap.to(playhead, {
+                    frame: images.length - 1,
+                    ease: "none",
+                    onUpdate: updateImage,
+                    duration: images.length / (config.fps || 30),
+                    paused: !!config.paused,
+                    scrollTrigger: config.scrollTrigger
                 });
-            return gsap.to(playhead, {
-                frame: images.length - 1,
-                ease: "none",
-                onUpdate: updateImage,
-                duration: images.length / (config.fps || 30),
-                paused: !!config.paused,
-                scrollTrigger: config.scrollTrigger
-            });
-        }
+            }
 
-        // First Video
-        const heroVideo = document.getElementById("intro-video");
-        heroVideo.currentTime = 0;
-        heroVideo.play();
-
-        setTimeout(() => {
-            heroVideo.pause();
+            // First Video
+            const heroVideo = document.getElementById("intro-video");
+            heroVideo.currentTime = 0;
+            heroVideo.play();
             document.body.classList.remove("overflow-hidden");
-        }, 1200);
 
-        // gsap.to(".entrance video", {
-        //     opacity: 0,
-        //     ease: "none",
-        //     scrollTrigger: {
-        //         trigger: ".entrance",
-        //         start: "top top",
-        //         end: "top+=10% top",
-        //         scrub: true,
-        //     }
-        // })
+            // setTimeout(() => {
+            //     heroVideo.pause();
+            // }, 1200);
 
-        gsap.to(".entrance canvas", {
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".entrance",
-                start: "top top",
-                end: "top+=10% top",
-                scrub: true,
-            }
-        })
+            // gsap.to(".entrance video", {
+            //     opacity: 0,
+            //     ease: "none",
+            //     scrollTrigger: {
+            //         trigger: ".entrance",
+            //         start: "top top",
+            //         end: "top+=10% top",
+            //         scrub: true,
+            //     }
+            // })
 
-        // Hero Canvas
-        let frameCount = 64,
-            urls = new Array(frameCount).fill().map((o, i) => `assets/image-sequence/hero/ham/2. video_${(i + 1).toString().padStart(5, '0')}.jpg`);
+            gsap.to(".entrance canvas", {
+                opacity: 1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".entrance",
+                    start: "top top",
+                    end: "top+=10% top",
+                    scrub: true,
+                }
+            })
 
-        const canvas = document.getElementById("hero-canvas");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+            // Hero Canvas
+            let frameCount = 64,
+                urls = new Array(frameCount).fill().map((o, i) => `assets/image-sequence/hero/ham/2. video_${(i + 1).toString().padStart(5, '0')}.jpg`);
 
-        imageSequence({
-            urls,
-            canvas: "#hero-canvas",
-            scrollTrigger: {
-                trigger: ".main .entrance",
-                start: "top top",
-                endTrigger: ".company-achievements",
-                end: "bottom bottom",
-                scrub: true,
-            }
-        });
+            const canvas = document.getElementById("hero-canvas");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-        // About Canvas
-        let frameCount2 = 149,
-            urls2 = new Array(frameCount2).fill().map((o, i) => `assets/image-sequence/map/optimize/harita_${(i + 1).toString().padStart(5, '0')}.jpg`);
+            imageSequence({
+                urls,
+                canvas: "#hero-canvas",
+                scrollTrigger: {
+                    trigger: ".main .entrance",
+                    start: "top top",
+                    endTrigger: ".company-achievements",
+                    end: "bottom bottom",
+                    scrub: true,
+                }
+            });
 
-        const canvas2 = document.getElementById("about-canvas");
-        canvas2.width = window.innerWidth;
-        canvas2.height = window.innerHeight;
+            // About Canvas
+            let frameCount2 = 149,
+                urls2 = new Array(frameCount2).fill().map((o, i) => `assets/image-sequence/map/optimize/harita_${(i + 1).toString().padStart(5, '0')}.jpg`);
 
-        imageSequence({
-            urls: urls2,
-            canvas: "#about-canvas",
-            scrollTrigger: {
-                trigger: ".about-vid",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true,
-            }
-        });
+            const canvas2 = document.getElementById("about-canvas");
+            canvas2.width = window.innerWidth;
+            canvas2.height = window.innerHeight;
 
-        // Members Canvas
-        let frameCount3 = 329,
-            urls3 = new Array(frameCount3).fill().map((o, i) => `assets/image-sequence/members/ham/kişiler düzeltme_${(i + 1).toString().padStart(5, '0')}.jpg`);
+            imageSequence({
+                urls: urls2,
+                canvas: "#about-canvas",
+                scrollTrigger: {
+                    trigger: ".about-vid",
+                    start: "top bottom",
+                    end: "bottom bottom",
+                    scrub: true,
+                }
+            });
 
-        const canvas3 = document.getElementById("members-canvas");
-        canvas3.width = window.innerWidth;
-        canvas3.height = window.innerHeight;
+            // Members Canvas
+            let frameCount3 = 300,
+                urls3 = new Array(frameCount3).fill().map((o, i) => `assets/image-sequence/members/ham/kişiler düzeltme_${(i + 1).toString().padStart(5, '0')}.jpg`);
 
-        imageSequence({
-            urls: urls3,
-            canvas: "#members-canvas",
-            scrollTrigger: {
-                trigger: ".members-vid",
-                start: "top top",
-                endTrigger: ".faq",
-                end: "bottom bottom",
-                scrub: true,
-            }
-        });
+            const canvas3 = document.getElementById("members-canvas");
+            canvas3.width = window.innerWidth;
+            canvas3.height = window.innerHeight;
+
+            imageSequence({
+                urls: urls3,
+                canvas: "#members-canvas",
+                scrollTrigger: {
+                    trigger: ".members-vid",
+                    start: "top bottom",
+                    endTrigger: ".members-vid",
+                    end: "bottom bottom",
+                    scrub: true,
+                }
+            });
+        } else {
+            document.body.classList.remove("overflow-hidden");
+
+            // First Video
+            const heroVideo = document.getElementById("intro-video");
+            heroVideo.currentTime = 0;
+            heroVideo.play();
+
+            setTimeout(() => {
+                heroVideo.pause();
+            }, 1200);
+        }
     }, 300);
 });
+
+// Contact Slide
+
+$(window).ready(function () {
+    if (window.location.href.indexOf('iletisim') > 0) {
+
+        setTimeout(() => {
+            $('html, body').animate({ scrollTop: $('.contact').offset().top - 30 }, 0)
+        }, 1000);
+    }
+})
