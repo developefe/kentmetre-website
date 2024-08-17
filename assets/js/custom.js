@@ -343,24 +343,24 @@ $('.sosyology-popup .texts .top .close, .sosyology-popup .bg').on('click', funct
 // ffmpeg -i ~/Downloads/Toshiba\ video/original.mov -movflags faststart -vcodec libx264 -crf 23 -g 1 -pix_fmt yuv420p output.mp4
 // ffmpeg -i ~/Downloads/Toshiba\ video/original.mov -vf scale=960:-1 -movflags faststart -vcodec libx264 -crf 20 -g 1 -pix_fmt yuv420p output_960.mp4
 
-const video = $("#v0");
-let src = video.currentSrc || video.src;
-console.log(video, src);
+// const video = $("#v0");
+// let src = video.currentSrc || video.src;
+// console.log(video, src);
 
-// /* Make sure the video is 'activated' on iOS */
-function once(el, event, fn, opts) {
-    var onceFn = function (e) {
-        el.removeEventListener(event, onceFn);
-        fn.apply(this, arguments);
-    };
-    el.addEventListener(event, onceFn, opts);
-    return onceFn;
-}
+// // /* Make sure the video is 'activated' on iOS */
+// function once(el, event, fn, opts) {
+//     var onceFn = function (e) {
+//         el.removeEventListener(event, onceFn);
+//         fn.apply(this, arguments);
+//     };
+//     el.addEventListener(event, onceFn, opts);
+//     return onceFn;
+// }
 
-once(document.documentElement, "touchstart", function (e) {
-    video.play();
-    video.pause();
-});
+// once(document.documentElement, "touchstart", function (e) {
+//     video.play();
+//     video.pause();
+// });
 
 // // /* ---------------------------------- */
 // // /* Scroll Control! */
@@ -477,9 +477,12 @@ var chartXAxisData = [];
 
 var options = {
     series: [{
-        name: chartName,
-        data: chartSeriesData
-    }],
+        name: 'Çelik',
+        data: [42, 52, 45, 63, 26, 37, 25, 12, 18]
+    },{
+        name: 'Çimento',
+        data: [20, 14, 25, 45, 53, 24, 65, 21, 64]
+    },],
     chart: {
         height: 185,
         type: 'area',
@@ -495,11 +498,11 @@ var options = {
     fill: {
         type: "gradient",
         gradient: {
-            colors: ["#ffffff"],
+            colors: ["#ffffff0"],
             shadeIntensity: 0,
-            opacityFrom: 0.7,
-            opacityTo: .3,
-            stops: [0, 100]
+            opacityFrom: 0,
+            opacityTo: 0,
+            stops: [0, 1]
         }
     },
     grid: {
@@ -516,12 +519,12 @@ var options = {
         enabled: false
     },
     stroke: {
-        curve: 'smooth',
+        curve: 'straight',
         width: 2,
     },
     xaxis: {
         // type: 'datetime',
-        categories: chartXAxisData
+        categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
     },
     tooltip: {
         theme: 'dark',
@@ -534,6 +537,86 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
 
+var options = {
+    series: [
+        {
+            name: 'Çelik',
+            data: [42, 52, 45, 63, 26, 37, 25, 12, 18]
+        },
+        {
+            name: 'Çimento',
+            data: [20, 14, 25, 45, 53, 24, 65, 21, 64]
+        },
+        {
+            name: 'Çimento 2',
+            data: [27, 12, 35, 55, 62, 34, 85, 61, 69]
+        },
+        {
+            name: 'Çimento 3',
+            data: [10, 14, 55, 45, 73, 51, 65, 36, 42]
+        },
+        {
+            name: 'Çimento 4',
+            data: [40, 34, 37, 45, 50, 37, 45, 11, 84]
+        },
+        {
+            name: 'Çimento 5',
+            data: [20, 14, 25, 45, 53, 24, 65, 21, 64]
+        }
+    ],
+    chart: {
+        height: 185,
+        type: 'area',
+        foreColor: "#9C9EAB",
+        toolbar: {
+            show: false,
+            tools: {
+                download: false,
+                selection: false,
+            },
+        }
+    },
+    fill: {
+        type: "gradient",
+        gradient: {
+            colors: ["#ffffff0"],
+            shadeIntensity: 0,
+            opacityFrom: 0,
+            opacityTo: 0,
+            stops: [0, 1]
+        }
+    },
+    grid: {
+        borderColor: "#202543",
+        clipMarkers: false,
+        //   yaxis: {
+        //     lines: {
+        //       show: false
+        //     }
+        //   }
+    },
+    colors: ['#878999'],
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'straight',
+        width: 2,
+    },
+    xaxis: {
+        // type: 'datetime',
+        categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
+    },
+    tooltip: {
+        theme: 'dark',
+        x: {
+            format: 'dd/MM/yy HH:mm'
+        },
+    },
+};
+
+var chart2 = new ApexCharts(document.querySelector("#chart-2"), options);
+chart2.render();
 
 // Map and Datas
 
@@ -587,14 +670,23 @@ function updateTable(data) {
         chartXAxisData.push(item.YIL);
     });
 
-    chart.updateOptions({
-        xaxis: {
-           categories: chartXAxisData
-        },
-        series: [{
-           data: chartSeriesData
-        }],
-     });
+    // chart.updateOptions({
+    //     xaxis: {
+    //        categories: chartXAxisData
+    //     },
+    //     series: [{
+    //        data: chartSeriesData
+    //     }],
+    //  });
+
+    //  chart2.updateOptions({
+    //     xaxis: {
+    //        categories: chartXAxisData
+    //     },
+    //     series: [{
+    //        data: chartSeriesData
+    //     }],
+    //  });
 
     if (data.length == 0) {
         tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>")
@@ -615,7 +707,7 @@ async function processDataAndDisplay(city, category, subCategory) {
     filteredData = sortByYear(filteredData);
     updateTable(filteredData);
 }
-processDataAndDisplay('ARTVIN', 'NÜFUS', 'YAS ARALIGI 90+')
+processDataAndDisplay('ISTANBUL', 'EKONOMI', 'TUMU')
 
 // Select
 
@@ -760,14 +852,14 @@ jQuery(document).ready(function() {
 
 // 
 
-const video2 = document.getElementById('videoxx');
-const totalScrollHeightd = document.body.scrollHeight - window.innerHeight;
+// const video2 = document.getElementById('videoxx');
+// const totalScrollHeightd = document.body.scrollHeight - window.innerHeight;
 
-// Kaydırma sırasında çalışacak olay
-window.addEventListener('scroll', function () {
-    const scrollTops = window.scrollY;
-    const scrollFractions = scrollTops / totalScrollHeightd;
-    const videoDuration2 = video2.duration;
+// // Kaydırma sırasında çalışacak olay
+// window.addEventListener('scroll', function () {
+//     const scrollTops = window.scrollY;
+//     const scrollFractions = scrollTops / totalScrollHeightd;
+//     const videoDuration2 = video2.duration;
 
-    video2.currentTime = scrollFractions * videoDuration2;
-});
+//     video2.currentTime = scrollFractions * videoDuration2;
+// });

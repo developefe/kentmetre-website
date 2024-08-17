@@ -1033,9 +1033,9 @@ align-items: center;
     opacity: .5;
 }
 
-.map-datas .left .chart-container { 
+.map-datas .left .chart-container {
     max-width: 100%;
-    height: 185px;
+    /* height: 185px; */
 }
 
 .map-datas .left .chart-container #chart {
@@ -1188,7 +1188,10 @@ padding: 15px 10px;
     margin-left: 45px;
 }
 
-.map-datas .right div#vmap {
+.map-datas .right #vmap {width: 1010px;height: 480px;}
+.map-datas .right #vmap svg {
+    width: 100%;
+    height: 100%;
 }
 .map-datas .right div#vmap svg >g {
     transform: translate(-22px, -120px);
@@ -2753,7 +2756,11 @@ margin-top: 5px;
 }
 
 .services-slider .services-box.vid .img {
-}   
+}
+    .map-datas .right #vmap {
+    width: 880px;
+    height: 340px;
+}
 }
 
 @media only screen and (max-width: 1552px){
