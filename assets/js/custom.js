@@ -326,10 +326,16 @@ jQuery(document).ready(function () {
 
         // Sosyology Popup
 
-        $('.sosyology .bottom .swiper .swiper-wrapper .swiper-slide .exp .btn, .sosyology .bottom .swiper .swiper-wrapper .swiper-slide .img').on('click', function () {
+        $('.sosyology .bottom .swiper .swiper-wrapper .swiper-slide .exp .btn, .sosyology .bottom .swiper .swiper-wrapper .swiper-slide .img, .policy-item').on('click', function () {
 
-            var parent = $(this).closest('.swiper-slide'),
-                img = parent.attr('data-img'),
+            var parent;
+            if ($(this).hasClass('policy-item')) {
+                parent = $(this);
+            } else {
+                parent = $(this).closest('.swiper-slide')
+            }
+
+            var img = parent.attr('data-img'),
                 title = parent.attr('data-title'),
                 subtitle = parent.attr('data-subtitle'),
                 exp = parent.attr('data-exp');
@@ -556,7 +562,7 @@ jQuery(document).ready(function () {
                 categories: ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
             },
             legend: {
-                show: false,
+                show: true,
                 fontSize: 10,
                 color: 'white'
             },
@@ -638,7 +644,7 @@ jQuery(document).ready(function () {
                 width: 2,
             },
             legend: {
-                show: false,
+                show: true,
                 fontSize: 10,
                 color: 'white'
             },
@@ -718,6 +724,28 @@ jQuery(document).ready(function () {
             };
         }
 
+        // Alt kategorilerin son yıl verilerini karşılaştırıp en yüksek 10 tanesini bulma fonksiyonu
+        function getTop10SubCategories(data) {
+            // Alt kategorilerin son yıl verilerini toplamak
+            const lastYearData = data.map(item => {
+                const lastYearValue = item.data[item.data.length - 1];
+                return {
+                    name: item.name,
+                    lastYearValue: parseFloat(lastYearValue)
+                };
+            });
+
+            // En yüksek 10 değeri bulma
+            const top10 = lastYearData
+                .sort((a, b) => b.lastYearValue - a.lastYearValue)
+                .slice(0, 10);
+
+            // Bu kategorilerin tüm yıl verilerini geri döndürmek
+            const top10FullData = data.filter(item => top10.some(topItem => topItem.name === item.name));
+
+            return top10FullData;
+        }
+
         var economyX;
         var economyY;
         var populationX;
@@ -729,28 +757,23 @@ jQuery(document).ready(function () {
             const sortedData = sortByYear(filteredData);
 
             const result = getSubCategoryData(sortedData);
+            const top10Data = getTop10SubCategories(result.formattedData);
 
-            if (category == 'EKONOMI') {
-                economyX = result.formattedData;
+            if (category === 'EKONOMI') {
+                economyX = top10Data;
                 economyY = result.years;
-            } else if (category == 'NÜFUS') {
-                populationX = result.formattedData;
+            } else if (category === 'NÜFUS') {
+                populationX = top10Data;
                 populationY = result.years;
             }
 
-            console.log(result.formattedData);
-            console.log(result.years);
+            // console.log(top10Data);
+            // console.log(result.years);
         }
 
-        // Filtrelenmiş veriyi tabloya ekleme fonksiyonu
         function updateTable(data) {
             const tableBody = $('#data-table-body');
-            var totalCount;
             tableBody.empty(); // Önceki içeriği temizle
-
-            // chartName = data[0].SEHIR;
-            // chartSeriesData = [];
-            // chartXAxisData = [];
 
             data.forEach((item, index) => {
                 const row = `
@@ -762,11 +785,7 @@ jQuery(document).ready(function () {
                 <td>${item.DEGER.toLocaleString()}</td>
             </tr>
         `;
-                totalCount = index;
                 tableBody.append(row);
-
-                // chartSeriesData.push(item.DEGER.toLocaleString());
-                // chartXAxisData.push(item.YIL);
             });
 
             chart.updateOptions({
@@ -783,12 +802,9 @@ jQuery(document).ready(function () {
                 series: populationX
             });
 
-            if (data.length == 0) {
-                tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>")
+            if (data.length === 0) {
+                tableBody.append("<p>Veri bulunamadı. Lütfen arama parametrelerini değiştiriniz.</p>");
             }
-
-            $('.map-datas .left .table-container table thead tr th:nth-child(4) span').remove();
-            $('.map-datas .left .table-container table thead tr th:nth-child(4)').append('<span>(' + (totalCount ? totalCount : 0) + ')</span>')
         }
 
         // Veriyi işleme ve tabloya bastırma
@@ -1003,7 +1019,7 @@ jQuery(document).ready(function () {
                 }
 
                 $('#map-citys').val(region)
-                console.log(region);
+                // console.log(region);
 
                 $('#map-citys').trigger('change')
 

@@ -40,5 +40,33 @@
         "KATEGORI": "NÜFUS",
         "ALT_KATEGORI": "HAYVANCILIK",
         "DEGER": 832
+    },
+    {
+        "YIL": 2023,
+        "SEHIR": "ISTANBUL",
+        "KATEGORI": "NÜFUS",
+        "ALT_KATEGORI": "HAYVANCILIK",
+        "DEGER": 1045
+    },
+    {
+        "YIL": 2022,
+        "SEHIR": "ISTANBUL",
+        "KATEGORI": "EKONOMI",
+        "ALT_KATEGORI": "CELIK",
+        "DEGER": 98
+    },
+    {
+        "YIL": 2022,
+        "SEHIR": "ISTANBUL",
+        "KATEGORI": "EKONOMI",
+        "ALT_KATEGORI": "CIMENTO",
+        "DEGER": 2932
+    },
+    {
+        "YIL": 2022,
+        "SEHIR": "ISTANBUL",
+        "KATEGORI": "NÜFUS",
+        "ALT_KATEGORI": "HAYVANCILIK",
+        "DEGER": 832
     }
 ]
